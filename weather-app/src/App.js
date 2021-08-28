@@ -1,11 +1,11 @@
 import React from 'react'
-import { Input } from './components/Input';
+import { MainArea } from './components/MainArea';
 
 export const App = () => {
 
   return (
     <>
-      <Input />
+      <MainArea />
     </>
   );
 }

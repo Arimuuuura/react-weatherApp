@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Place } from './Place';
-import { Main } from './Main';
-import { Weather } from './Weather';
-import { Wind } from './Wind';
-import { Clouds } from './Clouds';
-import { Visibility } from './Visibility';
-import { Sys } from './Sys';
+import { Place } from './ui/Place';
+import { Main } from './ui/Main';
+import { Weather } from './ui/Weather';
+import { Wind } from './ui/Wind';
+import { Clouds } from './ui/Clouds';
+import { Visibility } from './ui/Visibility';
+import { Sys } from './ui/Sys';
+import { Input } from './ui/Input';
 
-export const Input = () => {
+export const MainArea = () => {
 
   const [data, setData] = useState({});
   const [text, setText] = useState('');
@@ -44,8 +45,7 @@ export const Input = () => {
           <p>Loading...</p>
         ) : (
           <>
-            <input onChange={onChangeText} />
-            <button onClick={onClickGetCode}>GET</button>
+            <Input onChange={onChangeText} onClick={onClickGetCode}>GET</Input>
             <Place data={data} />
             <Main data={data} />
             <Weather data={data} />
