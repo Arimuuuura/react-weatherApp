@@ -8,7 +8,7 @@ export const Input = () => {
   const [data, setData] = useState({});
   const [text, setText] = useState('');
   const [zipCode, setZipCode] = useState('170-0012')
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,9 +17,9 @@ export const Input = () => {
       );
 
       setData(result.data);
+      setIsLoading(false);
     };
     fetchData();
-    setIsLoading(false);
   }, [zipCode]);
 
   const onChangeText = (e) => {
@@ -29,6 +29,8 @@ export const Input = () => {
   const onClickGetCode = () => {
     setZipCode(text);
   }
+
+  // console.log(data);
 
   return (
     <>
