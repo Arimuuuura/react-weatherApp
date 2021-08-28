@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Place } from './Place';
 import { Main } from './Main';
+import { Weather } from './Weather';
 
 export const Input = () => {
 
@@ -30,7 +31,7 @@ export const Input = () => {
     setZipCode(text);
   }
 
-  // console.log(data);
+  console.log(data);
 
   return (
     <>
@@ -43,6 +44,7 @@ export const Input = () => {
             <button onClick={onClickGetCode}>GET</button>
             <Place data={data} />
             <Main data={data} />
+            <Weather data={data} />
           </>
         )
       }
