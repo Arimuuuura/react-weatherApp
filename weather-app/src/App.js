@@ -1,12 +1,11 @@
-import { Main } from './components/ui/Main';
+import React from 'react'
+import { Input } from './components/Input';
 
-const App = () => {
+export const App = () => {
+
   return (
-    <div className="App">
-      Hello React
-      <Main />
-    </div>
+    <>
+      <Input />
+    </>
   );
 }
-
-export default App;
