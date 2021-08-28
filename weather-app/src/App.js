@@ -1,11 +1,11 @@
 import React from 'react'
-import { MainArea } from './components/MainArea';
+import { GetData } from './components/GetData';
 
 export const App = () => {
 
   return (
     <>
-      <MainArea />
+      <GetData />
     </>
   );
 }
