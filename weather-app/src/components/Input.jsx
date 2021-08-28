@@ -6,6 +6,7 @@ import { Weather } from './Weather';
 import { Wind } from './Wind';
 import { Clouds } from './Clouds';
 import { Visibility } from './Visibility';
+import { Sys } from './Sys';
 
 export const Input = () => {
 
@@ -51,6 +52,7 @@ export const Input = () => {
             <Wind data={data} />
             <Clouds data={data} />
             <Visibility data={data} />
+            <Sys data={data} />
           </>
         )
       }
