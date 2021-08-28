@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Place } from './Place';
 import { Main } from './Main';
 import { Weather } from './Weather';
+import { Wind } from './Wind';
 
 export const Input = () => {
 
@@ -45,6 +46,7 @@ export const Input = () => {
             <Place data={data} />
             <Main data={data} />
             <Weather data={data} />
+            <Wind data={data} />
           </>
         )
       }
