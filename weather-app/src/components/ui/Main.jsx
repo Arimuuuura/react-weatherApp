@@ -20,7 +20,7 @@ export const Main = (props) => {
     <Container>
       <TextContainer>
         <p>{description}</p>
-        <p>{temp}</p>
+        <p>{`${temp}℃`}</p>
       </TextContainer>
       <img src={imgUrl} alt="アイコン" />
     </Container>
