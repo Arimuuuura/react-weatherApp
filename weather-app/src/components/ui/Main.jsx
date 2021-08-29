@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Container = styled.h2`
+const Container = styled.div`
   text-align: center;
 `
 
