@@ -1,14 +1,28 @@
 import React from 'react'
+import styled from 'styled-components';
+
+const Container = styled.h2`
+  text-align: center;
+`
+
+const TextContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  margin: 16px auto;
+`
 
 export const Main = (props) => {
 
-  const { description, temp, imgUrl } = props;
+  const { description, temp, icon } = props;
+  const imgUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
 
   return (
-    <>
-      <p>{`description : ${description}`}</p>
-      <p>{`temp : ${temp}`}</p>
+    <Container>
+      <TextContainer>
+        <p>{description}</p>
+        <p>{temp}</p>
+      </TextContainer>
       <img src={imgUrl} alt="アイコン" />
-    </>
+    </Container>
   )
 }
