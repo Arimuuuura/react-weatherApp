@@ -9,13 +9,11 @@ const CityName = styled.h2`
 
 export const Place = (props) => {
 
-  if (!Object.keys(props.data).length) return null
-
-  const { data } = props;
+  const { children } = props;
 
   return (
     <>
-      <CityName>{data.name}</CityName>
+      <CityName>{children}</CityName>
     </>
   )
 }
