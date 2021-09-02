@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
 import styled from 'styled-components';
+import { Button, FirstInput, SecondInput } from './components/ui/Input';
 import { MainArea } from './components/MainArea';
+import { useGetData } from './function/getData';
 
 const Container = styled.div`
   background-color: aqua;
@@ -9,32 +10,7 @@ const Container = styled.div`
 
 export const App = () => {
 
-  const [data, setData] = useState({});
-  const [text, setText] = useState('');
-  const [zipCode, setZipCode] = useState('170-0012')
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(
-        `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},jp&appid=8f241f6e111e93a94a517a3c6477329e&lang=ja&units=metric`,
-      );
-
-      setData(result.data);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, [zipCode]);
-
-  const onChangeText = (e) => {
-    setText(e.target.value);
-  }
-
-  const onClickGetCode = () => {
-    setZipCode(text);
-  }
-
-  console.log(data);
+  const { isLoading, onChangeTextFirst, onChangeTextSecond, onClickGetCode, data } = useGetData();
 
   return (
     <Container>
@@ -43,7 +19,14 @@ export const App = () => {
           <p>Loading...</p>
         ) : (
           <>
-            <MainArea  onChange={onChangeText} onClick={onClickGetCode} data={data} />
+            <FirstInput onChange={onChangeTextFirst} />
+            <SecondInput onChange={onChangeTextSecond} />
+            <Button onClick={onClickGetCode}>GET</Button>
+            <MainArea
+              onChange={onChangeTextFirst}
+              onClick={onClickGetCode}
+              data={data}
+            />
           </>
         )
       }
