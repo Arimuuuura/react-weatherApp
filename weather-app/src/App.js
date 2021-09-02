@@ -1,16 +1,16 @@
 import React from 'react'
 import styled from 'styled-components';
-import { Button, FirstInput, SecondInput } from './components/ui/Input';
-import { MainArea } from './components/MainArea';
 import { useGetData } from './function/getData';
+import { Controller } from './components/controls/Controller';
 
 const Container = styled.div`
-  background-color: aqua;
+  border: 1px solid #333;
 `
 
 export const App = () => {
+  console.log('app');
 
-  const { isLoading, onChangeTextFirst, onChangeTextSecond, onClickGetCode, data } = useGetData();
+  const { isLoading } = useGetData();
 
   return (
     <Container>
@@ -18,16 +18,7 @@ export const App = () => {
         isLoading ? (
           <p>Loading...</p>
         ) : (
-          <>
-            <FirstInput onChange={onChangeTextFirst} />
-            <SecondInput onChange={onChangeTextSecond} />
-            <Button onClick={onClickGetCode}>GET</Button>
-            <MainArea
-              onChange={onChangeTextFirst}
-              onClick={onClickGetCode}
-              data={data}
-            />
-          </>
+          <Controller />
         )
       }
     </Container>

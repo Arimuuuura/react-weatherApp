@@ -1,13 +1,14 @@
 import React from 'react'
-import { Input } from './ui/Input';
-import { Place } from './ui/Place';
-import { Main } from './ui/Main';
-import { Temp } from './ui/Temp';
-import { Detail } from './ui/Detail';
+import { Place } from '../Place';
+import { Main } from '../Main';
+import { Temp } from '../Temp';
+import { Detail } from '../Detail';
 
 export const MainArea = (props) => {
 
-  const { onChange, onClick, data } = props;
+  const { data } = props;
+  if (Object.keys(data).length === 0) return null;
+
   const { name, main, weather, wind, clouds, visibility, sys } = data;
   const { temp, temp_min, temp_max, feels_like, humidity, pressure } = main;
   const [{ description, icon }] = weather;
@@ -17,7 +18,6 @@ export const MainArea = (props) => {
 
   return (
     <>
-      <Input onChange={onChange} onClick={onClick}>GET</Input>
       <Place data={data}>{name}</Place>
       <Main description={description} temp={temp} icon={icon} />
       <Temp temp_min={temp_min} temp_max={temp_max} feels_like={feels_like} />
