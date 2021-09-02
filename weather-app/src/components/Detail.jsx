@@ -9,6 +9,12 @@ const Container = styled.div`
   padding: 16px 0;
 `
 
+const ToggleText = styled.p`
+  font-size: 14px;
+  margin: 16px 28px 0 0;
+  text-align: end;
+`
+
 export const Detail = (props) => {
 
   const {
@@ -53,15 +59,18 @@ export const Detail = (props) => {
   }
 
   return (
-    <Container>
-      <p>{`湿度 ${humidity}％`}</p>
-      <p>{`気圧 ${pressure}hPa`}</p>
-      <p>{`日の出 ${getTime(sunrise)}`}</p>
-      <p>{`日の入り ${getTime(sunset)}`}</p>
-      <p>{`${windDirection} ${speed}m/s`}</p>
-      <p>{ gust ? `突風 ${gust}m/s` : '突風情報なし' }</p>
-      <p>{`雲量 ${all}％`}</p>
-      <p>{`視程 ${visibility}m`}</p>
-    </Container>
+    <>
+      <ToggleText>詳しく見る</ToggleText>
+      <Container>
+        <p>{`湿度 ${humidity}％`}</p>
+        <p>{`気圧 ${pressure}hPa`}</p>
+        <p>{`日の出 ${getTime(sunrise)}`}</p>
+        <p>{`日の入り ${getTime(sunset)}`}</p>
+        <p>{`${windDirection} ${speed}m/s`}</p>
+        <p>{ gust ? `突風 ${gust}m/s` : '突風情報なし' }</p>
+        <p>{`雲量 ${all}％`}</p>
+        <p>{`視程 ${visibility}m`}</p>
+      </Container>
+    </>
   )
 }
