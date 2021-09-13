@@ -8,7 +8,6 @@ const Container = styled.div`
 `
 
 export const App = () => {
-  console.log('app');
 
   const { isLoading } = useGetData();
 

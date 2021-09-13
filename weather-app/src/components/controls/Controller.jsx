@@ -15,7 +15,6 @@ const Container = styled.div`
 
 export const Controller = () => {
 
-  console.log('controll');
   const { onChangeTextFirst, onChangeTextSecond, onClickGetCode, data } = useGetData();
 
   return (

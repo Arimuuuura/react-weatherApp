@@ -10,12 +10,15 @@ export const useGetData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(
+      await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},jp&appid=8f241f6e111e93a94a517a3c6477329e&lang=ja&units=metric`,
-      );
+      ).then((res) => {
+        setData(res.data);
+        setIsLoading(false);
+      }).catch((err) => {
+        console.log(err);
+      });
 
-      setData(result.data);
-      setIsLoading(false);
     };
     fetchData();
   }, [zipCode]);

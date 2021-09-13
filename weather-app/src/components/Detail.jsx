@@ -9,12 +9,6 @@ const Container = styled.div`
   padding: 16px 0;
 `
 
-const ToggleText = styled.p`
-  font-size: 14px;
-  margin: 16px 28px 0 0;
-  text-align: end;
-`
-
 export const Detail = (props) => {
 
   const {
@@ -60,7 +54,6 @@ export const Detail = (props) => {
 
   return (
     <>
-      <ToggleText>詳しく見る</ToggleText>
       <Container>
         <p>{`湿度 ${humidity}％`}</p>
         <p>{`気圧 ${pressure}hPa`}</p>
