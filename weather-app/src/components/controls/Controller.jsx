@@ -15,7 +15,9 @@ const Container = styled.div`
 
 export const Controller = () => {
 
-  const { onChangeTextFirst, onChangeTextSecond, onClickGetCode, data } = useGetData();
+  const { onChangeTextFirst, onChangeTextSecond, onClickGetZip, onClickGetCity, currentData, weeklyData } = useGetData();
+
+  console.log(weeklyData);
 
   return (
     <>
@@ -24,9 +26,10 @@ export const Controller = () => {
         <InputBox placeholder="100" onChange={onChangeTextFirst} />
         <span>-</span>
         <InputBox placeholder="0000" onChange={onChangeTextSecond} />
-        <Button onClick={onClickGetCode}>検索</Button>
+        <Button onClick={onClickGetZip}>検索</Button>
+        <Button onClick={onClickGetCity}>都市</Button>
       </Container>
-      <MainArea data={data} />
+      <MainArea data={currentData} />
     </>
   )
 }

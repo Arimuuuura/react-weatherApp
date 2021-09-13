@@ -2,26 +2,57 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export const useGetData = () => {
-  const [data, setData] = useState({});
+  const [currentData, setCurrentData] = useState({});
+  const [weeklyData, setWeeklyData] = useState({});
   const [firstText, setFirstText] = useState('');
   const [secondText, setSecondText] = useState('');
-  const [zipCode, setZipCode] = useState('170-0012')
+  const [zipCode, setZipCode] = useState('')
+  const [cityCode, setCityCode] = useState('1850144')
   const [isLoading, setIsLoading] = useState(true)
+  const [isZip, setIsZip] = useState(false)
+  const [isCity, setIsCity] = useState(true)
+
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  const CURRENT_WEATHER_URL = process.env.REACT_APP_CURRENT_WEATHER_URL;
+  const WEEKLY_WEATHER_URL = process.env.REACT_APP_WEEKLY_WEATHER_URL;
+  const LANGUAGE = process.env.REACT_APP_LANGUAGE;
+  const UNITS = process.env.REACT_APP_UNITS;
+  let getCurrentApi;
+  let getWeeklyApi;
+  if (isZip) {
+    getCurrentApi = `${CURRENT_WEATHER_URL}?zip=${zipCode},jp&appid=${API_KEY}&lang=${LANGUAGE}&units=${UNITS}`;
+    getWeeklyApi = `${WEEKLY_WEATHER_URL}?zip=${zipCode},jp&appid=${API_KEY}&lang=${LANGUAGE}&units=${UNITS}`;
+  } else if (isCity) {
+    getCurrentApi = `${CURRENT_WEATHER_URL}?id=${cityCode}&appid=${API_KEY}&lang=${LANGUAGE}&units=${UNITS}`;
+    getWeeklyApi = `${WEEKLY_WEATHER_URL}?id=${cityCode}&appid=${API_KEY}&lang=${LANGUAGE}&units=${UNITS}`;
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCurrentData = async () => {
       await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},jp&appid=8f241f6e111e93a94a517a3c6477329e&lang=ja&units=metric`,
+        getCurrentApi,
       ).then((res) => {
-        setData(res.data);
+        setCurrentData(res.data);
         setIsLoading(false);
       }).catch((err) => {
         console.log(err);
       });
-
     };
-    fetchData();
-  }, [zipCode]);
+
+    const fetchWeeklyData = async () => {
+      await axios.get(
+        getWeeklyApi,
+      ).then((res) => {
+        setWeeklyData(res.data);
+        setIsLoading(false);
+      }).catch((err) => {
+        console.log(err);
+      });
+    };
+
+    fetchCurrentData();
+    fetchWeeklyData();
+  }, [zipCode, cityCode]);
 
   const onChangeTextFirst = (e) => {
     setFirstText(e.target.value);
@@ -31,9 +62,18 @@ export const useGetData = () => {
     setSecondText(e.target.value);
   }
 
-  const onClickGetCode = () => {
+  const onClickGetZip = () => {
     setZipCode(`${firstText}-${secondText}`);
+    setCityCode('');
+    setIsCity(false);
+    setIsZip(true);
   }
 
-  return { isLoading, onChangeTextFirst, onChangeTextSecond, onClickGetCode, data }
+  const onClickGetCity = () => {
+    setCityCode('1850144');
+    setIsZip(false);
+    setIsCity(true);
+  }
+
+  return { isLoading, onChangeTextFirst, onChangeTextSecond, onClickGetZip, onClickGetCity, currentData, weeklyData }
 }
