@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import { Place } from '../Place';
 import { Main } from '../Main';
@@ -13,6 +13,8 @@ const ToggleText = styled.p`
 
 export const MainArea = (props) => {
 
+  const [isDetail, setIsDetail] = useState(false);
+
   const { data } = props;
   if (Object.keys(data).length === 0) return null;
 
@@ -24,7 +26,7 @@ export const MainArea = (props) => {
   const { sunrise, sunset } = sys;
 
   const onClickDetail = () => {
-    console.log('detail');
+    setIsDetail(!isDetail);
   }
 
   return (
@@ -32,18 +34,26 @@ export const MainArea = (props) => {
       <Place data={data}>{name}</Place>
       <Main description={description} temp={temp} icon={icon} />
       <Temp temp_min={temp_min} temp_max={temp_max} feels_like={feels_like} />
-      <ToggleText onClick={onClickDetail}>詳しく見る</ToggleText>
-      <Detail
-        humidity={humidity}
-        pressure={pressure}
-        sunrise={sunrise}
-        sunset={sunset}
-        deg={deg}
-        speed={speed}
-        gust={gust}
-        all={all}
-        visibility={visibility}
-      />
+      {
+        isDetail ? (
+          <>
+            <ToggleText onClick={onClickDetail}>閉じる</ToggleText>
+            <Detail
+              humidity={humidity}
+              pressure={pressure}
+              sunrise={sunrise}
+              sunset={sunset}
+              deg={deg}
+              speed={speed}
+              gust={gust}
+              all={all}
+              visibility={visibility}
+            />
+          </>
+        ) : (
+          <ToggleText onClick={onClickDetail}>詳しく見る</ToggleText>
+        )
+      }
     </>
   )
 }
