@@ -9,28 +9,22 @@ export const useGetData = () => {
   const [zipCode, setZipCode] = useState('')
   const [cityCode, setCityCode] = useState('1850144')
   const [isLoading, setIsLoading] = useState(true)
-  const [isZip, setIsZip] = useState(false)
-  const [isCity, setIsCity] = useState(true)
 
   const API_KEY = process.env.REACT_APP_API_KEY;
   const CURRENT_WEATHER_URL = process.env.REACT_APP_CURRENT_WEATHER_URL;
   const WEEKLY_WEATHER_URL = process.env.REACT_APP_WEEKLY_WEATHER_URL;
   const LANGUAGE = process.env.REACT_APP_LANGUAGE;
   const UNITS = process.env.REACT_APP_UNITS;
-  let getCurrentApi;
-  let getWeeklyApi;
-  if (isZip) {
-    getCurrentApi = `${CURRENT_WEATHER_URL}?zip=${zipCode},jp&appid=${API_KEY}&lang=${LANGUAGE}&units=${UNITS}`;
-    getWeeklyApi = `${WEEKLY_WEATHER_URL}?zip=${zipCode},jp&appid=${API_KEY}&lang=${LANGUAGE}&units=${UNITS}`;
-  } else if (isCity) {
-    getCurrentApi = `${CURRENT_WEATHER_URL}?id=${cityCode}&appid=${API_KEY}&lang=${LANGUAGE}&units=${UNITS}`;
-    getWeeklyApi = `${WEEKLY_WEATHER_URL}?id=${cityCode}&appid=${API_KEY}&lang=${LANGUAGE}&units=${UNITS}`;
-  }
+
+  const query = `?${zipCode ? `zip=${zipCode},jp` : `id=${cityCode}`}&appid=${API_KEY}&lang=${LANGUAGE}&units=${UNITS}`;
+
+  const getCurrentApiUrl = `${CURRENT_WEATHER_URL}${query}`;
+  const getWeeklyApiUrl = `${WEEKLY_WEATHER_URL}${query}`;
 
   useEffect(() => {
     const fetchCurrentData = async () => {
       await axios.get(
-        getCurrentApi,
+        getCurrentApiUrl,
       ).then((res) => {
         setCurrentData(res.data);
         setIsLoading(false);
@@ -41,7 +35,7 @@ export const useGetData = () => {
 
     const fetchWeeklyData = async () => {
       await axios.get(
-        getWeeklyApi,
+        getWeeklyApiUrl,
       ).then((res) => {
         setWeeklyData(res.data);
         setIsLoading(false);
@@ -52,6 +46,7 @@ export const useGetData = () => {
 
     fetchCurrentData();
     fetchWeeklyData();
+    // eslint-disable-next-line
   }, [zipCode, cityCode]);
 
   const onChangeTextFirst = (e) => {
@@ -65,15 +60,20 @@ export const useGetData = () => {
   const onClickGetZip = () => {
     setZipCode(`${firstText}-${secondText}`);
     setCityCode('');
-    setIsCity(false);
-    setIsZip(true);
   }
 
   const onClickGetCity = () => {
     setCityCode('1850144');
-    setIsZip(false);
-    setIsCity(true);
+    setZipCode('');
   }
 
-  return { isLoading, onChangeTextFirst, onChangeTextSecond, onClickGetZip, onClickGetCity, currentData, weeklyData }
+  return {
+    isLoading,
+    onChangeTextFirst,
+    onChangeTextSecond,
+    onClickGetZip,
+    onClickGetCity,
+    currentData,
+    weeklyData
+  }
 }
