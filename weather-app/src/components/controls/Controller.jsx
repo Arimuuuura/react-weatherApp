@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { InputBox } from '../Input';
 import { Button } from '../Button';
 import { MainArea } from './MainArea';
+import { Every3HoursArea } from './Every3HoursArea';
+// import { SearchArea } from './SearchArea';
 
 const Container = styled.div`
   background: rgba(0, 128, 128, 0.5);
@@ -17,8 +19,7 @@ export const Controller = () => {
 
   const { onChangeTextFirst, onChangeTextSecond, onClickGetZip, onClickGetCity, currentData, weeklyData } = useGetData();
 
-  console.log(weeklyData);
-
+  // todo SearchArea component を呼び出せるようにする
   return (
     <>
       <Container>
@@ -26,10 +27,12 @@ export const Controller = () => {
         <InputBox placeholder="100" onChange={onChangeTextFirst} />
         <span>-</span>
         <InputBox placeholder="0000" onChange={onChangeTextSecond} />
+        {/* <SearchArea first={onChangeTextFirst} second={onChangeTextSecond} /> */}
         <Button onClick={onClickGetZip}>検索</Button>
         <Button onClick={onClickGetCity}>都市</Button>
       </Container>
       <MainArea data={currentData} />
+      <Every3HoursArea />
     </>
   )
 }
