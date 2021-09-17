@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useGetData } from '../../function/getData';
 import styled from 'styled-components';
 import { InputBox } from '../Input';
 import { Button } from '../Button';
 import { MainArea } from './MainArea';
 import { Every3HoursArea } from './Every3HoursArea';
+import { WeeklyWeather } from './WeeklyWeather';
 // import { SearchArea } from './SearchArea';
 
 const Container = styled.div`
@@ -15,7 +16,8 @@ const Container = styled.div`
   }
 `
 
-export const Controller = () => {
+export const Controller = memo(() => {
+  // console.log("Controller");
 
   const { onChangeTextFirst, onChangeTextSecond, onClickGetZip, onClickGetCity, currentData, weeklyData } = useGetData();
 
@@ -33,6 +35,7 @@ export const Controller = () => {
       </Container>
       <MainArea data={currentData} />
       <Every3HoursArea />
+      <WeeklyWeather />
     </>
   )
-}
+})

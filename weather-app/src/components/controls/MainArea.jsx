@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import styled from 'styled-components';
 import { Place } from '../Place';
 import { Main } from '../Main';
@@ -11,7 +11,8 @@ const ToggleText = styled.p`
   text-align: end;
 `
 
-export const MainArea = (props) => {
+export const MainArea = memo((props) => {
+  // console.log("MainArea");
 
   const [isDetail, setIsDetail] = useState(false);
 
@@ -56,4 +57,4 @@ export const MainArea = (props) => {
       }
     </>
   )
-}
+})

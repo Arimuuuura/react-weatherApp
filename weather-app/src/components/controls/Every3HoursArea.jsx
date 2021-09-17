@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components';
 import { getDecimal } from '../../function/calculation';
 import { useGetData } from '../../function/getData';
@@ -41,7 +41,8 @@ const Icon = styled.img`
   margin: 0 auto;
 `
 
-export const Every3HoursArea = () => {
+export const Every3HoursArea = memo(() => {
+  // console.log("Every3HoursArea");
 
   const { weeklyData } = useGetData();
 
@@ -81,11 +82,11 @@ export const Every3HoursArea = () => {
           kinds.map((val) => (
             val.id < 8 ? (
               <ResultUl>
-                <li key={val.id}>{val.dt}</li>
-                <li key={val.id}>{val.icon}</li>
-                <li key={val.id}>{val.temp}</li>
-                <li key={val.id}>{val.humidity}</li>
-                <li key={val.id}>{val.speed}</li>
+                <li>{val.dt}</li>
+                <li>{val.icon}</li>
+                <li>{val.temp}</li>
+                <li>{val.humidity}</li>
+                <li>{val.speed}</li>
               </ResultUl>
             ) : null
           ))
@@ -93,4 +94,4 @@ export const Every3HoursArea = () => {
       </ContainerResult>
     </Container>
   )
-}
+})
