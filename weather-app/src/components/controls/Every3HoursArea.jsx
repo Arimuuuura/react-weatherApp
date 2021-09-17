@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { getDecimal } from '../../function/calculation';
 import { useGetData } from '../../function/getData';
 
 const Container = styled.div`
@@ -27,8 +28,11 @@ const ContainerResult = styled.div`
 `
 
 const ResultUl = styled.ul`
-  width: 64px;
   text-align: center;
+  & li {
+    width: 64px;
+    box-sizing: border-box;
+  }
 `
 
 const Icon = styled.img`
@@ -48,10 +52,10 @@ export const Every3HoursArea = () => {
   const kinds = list.map((val, index) => {
     const id = index;
     const dt = `${new Date(val.dt * 1000).getHours()}時`;
-    const temp = `${val.main.temp}℃`;
+    const temp = `${getDecimal(val.main.temp)}℃`;
     const humidity = `${val.main.humidity}%`;
     const icon = <Icon src={`http://openweathermap.org/img/wn/${val.weather[0].icon}@2x.png`} alt="アイコン" />;
-    const speed = `${val.wind.speed}m/s`;
+    const speed = `${getDecimal(val.wind.speed)}m/s`;
 
     return {
       id,
@@ -62,8 +66,6 @@ export const Every3HoursArea = () => {
       speed
     }
   })
-
-  console.log(kinds);
 
   return (
     <Container>

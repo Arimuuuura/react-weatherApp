@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { getDecimal } from '../function/calculation';
 
 const Container = styled.div`
   text-align: center;
@@ -59,8 +60,8 @@ export const Detail = (props) => {
         <p>{`気圧 ${pressure}hPa`}</p>
         <p>{`日の出 ${getTime(sunrise)}`}</p>
         <p>{`日の入り ${getTime(sunset)}`}</p>
-        <p>{`${windDirection} ${speed}m/s`}</p>
-        <p>{ gust ? `突風 ${gust}m/s` : '突風情報なし' }</p>
+        <p>{`${windDirection} ${getDecimal(speed)}m/s`}</p>
+        <p>{ gust ? `突風 ${getDecimal(gust)}m/s` : '突風情報なし' }</p>
         <p>{`雲量 ${all}％`}</p>
         <p>{`視程 ${visibility}m`}</p>
       </Container>

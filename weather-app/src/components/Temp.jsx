@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { getDecimal } from '../function/calculation';
 
 const Container = styled.div`
   text-align: center;
@@ -22,9 +23,9 @@ export const Temp = (props) => {
 
   return (
     <Container>
-      <p className="temp_min">{`最低 ${temp_min}℃`}</p>
-      <p className="temp_max">{`最高 ${temp_max}℃`}</p>
-      <p className="feels_like">{`体感 ${feels_like}℃`}</p>
+      <p className="temp_min">{`最低 ${getDecimal(temp_min)}℃`}</p>
+      <p className="temp_max">{`最高 ${getDecimal(temp_max)}℃`}</p>
+      <p className="feels_like">{`体感 ${getDecimal(feels_like)}℃`}</p>
     </Container>
   )
 }

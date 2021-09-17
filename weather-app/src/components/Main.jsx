@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { getDecimal } from '../function/calculation';
 
 const Container = styled.div`
   text-align: center;
@@ -20,7 +21,7 @@ export const Main = (props) => {
     <Container>
       <TextContainer>
         <p>{description}</p>
-        <p>{`${temp}℃`}</p>
+        <p>{`${getDecimal(temp)}℃`}</p>
       </TextContainer>
       <img src={imgUrl} alt="アイコン" />
     </Container>
