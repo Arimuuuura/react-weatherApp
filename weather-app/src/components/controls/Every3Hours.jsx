@@ -41,7 +41,7 @@ const Icon = styled.img`
   margin: 0 auto;
 `
 
-export const Every3HoursArea = memo(() => {
+export const Every3Hours = memo(() => {
   // console.log("Every3HoursArea");
 
   const { weeklyData } = useGetData();
@@ -50,7 +50,7 @@ export const Every3HoursArea = memo(() => {
   const { cod, list} = weeklyData;
   // todo cod を使ってレスポンス結果の出し分け実装 cod : 200 or 404
 
-  const kinds = list.map((val, index) => {
+  const data = list.map((val, index) => {
     const id = index;
     const dt = `${new Date(val.dt * 1000).getHours()}時`;
     const temp = `${getDecimal(val.main.temp)}℃`;
@@ -79,7 +79,7 @@ export const Every3HoursArea = memo(() => {
       </TitleUl>
       <ContainerResult>
         {
-          kinds.map((val) => (
+          data.map((val) => (
             val.id < 8 ? (
               <ResultUl>
                 <li>{val.dt}</li>

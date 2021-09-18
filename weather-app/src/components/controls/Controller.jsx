@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { InputBox } from '../Input';
 import { Button } from '../Button';
 import { MainArea } from './MainArea';
-import { Every3HoursArea } from './Every3HoursArea';
+import { Every3Hours } from './Every3Hours';
 import { WeeklyWeather } from './WeeklyWeather';
 // import { SearchArea } from './SearchArea';
 
@@ -34,7 +34,7 @@ export const Controller = memo(() => {
         <Button onClick={onClickGetCity}>都市</Button>
       </Container>
       <MainArea data={currentData} />
-      <Every3HoursArea />
+      <Every3Hours />
       <WeeklyWeather />
     </>
   )
