@@ -80,8 +80,10 @@ video {
   list-style-type: none;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap");
+
 body {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Yusei Magic', sans-serif;
   font-weight: normal;
   scroll-behavior: smooth;
   color: #333;
