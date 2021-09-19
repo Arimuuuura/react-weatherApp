@@ -7,8 +7,10 @@ import { Detail } from '../Detail';
 
 const ToggleText = styled.p`
   font-size: 14px;
-  margin: 16px 28px 0 0;
+  margin-right: 0;
+  padding: 16px 28px;
   text-align: end;
+  color: skyBlue;
 `
 
 export const MainArea = memo((props) => {
