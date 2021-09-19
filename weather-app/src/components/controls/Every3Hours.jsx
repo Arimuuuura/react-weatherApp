@@ -30,7 +30,7 @@ const ContainerResult = styled.div`
 const ResultUl = styled.ul`
   text-align: center;
   & li {
-    width: 64px;
+    width: calc((414px - 56px) / 5);
     box-sizing: border-box;
   }
 `
