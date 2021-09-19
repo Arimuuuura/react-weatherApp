@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SunIcon from './images/sun.png'
 import StarIcon from './images/star.png'
 
-const Container = styled.header`
+const Container = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 16px auto;

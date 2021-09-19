@@ -7,6 +7,7 @@ import { MainArea } from './MainArea';
 import { Every3Hours } from './Every3Hours';
 import { WeeklyWeather } from './WeeklyWeather';
 import { Header } from '../Header';
+import { Footer } from '../Footer';
 // import { SearchArea } from './SearchArea';
 
 const Container = styled.div`
@@ -38,6 +39,7 @@ export const Controller = memo(() => {
       <MainArea data={currentData} />
       <Every3Hours />
       <WeeklyWeather />
+      <Footer />
     </>
   )
 })
