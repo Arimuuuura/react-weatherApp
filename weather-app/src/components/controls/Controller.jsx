@@ -6,6 +6,7 @@ import { Button } from '../Button';
 import { MainArea } from './MainArea';
 import { Every3Hours } from './Every3Hours';
 import { WeeklyWeather } from './WeeklyWeather';
+import { Header } from '../Header';
 // import { SearchArea } from './SearchArea';
 
 const Container = styled.div`
@@ -24,6 +25,7 @@ export const Controller = memo(() => {
   // todo SearchArea component を呼び出せるようにする
   return (
     <>
+      <Header />
       <Container>
         <span>〒</span>
         <InputBox placeholder="100" onChange={onChangeTextFirst} />
