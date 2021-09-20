@@ -35,9 +35,9 @@ export const WeeklyWeather = memo(() => {
     const getDay = new Date(val.dt * 1000).getDay();
     const dayOfWeek = [ "日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日" ][getDay] ;
     const icon = <Icon src={`http://openweathermap.org/img/wn/${val.weather[0].icon}@2x.png`} alt="アイコン" />;
-    const pop = `${val.pop * 100}%`;
+    const pop = `${getDecimal(val.pop * 100)}%`;
     const temp = `${getDecimal(val.main.temp)}℃`;
-    const humidity = `${val.main.humidity}%`;
+    const humidity = `${getDecimal(val.main.humidity)}%`;
 
     return {
       id,

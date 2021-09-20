@@ -54,7 +54,7 @@ export const Every3Hours = memo(() => {
     const id = index;
     const dt = `${new Date(val.dt * 1000).getHours()}時`;
     const temp = `${getDecimal(val.main.temp)}℃`;
-    const humidity = `${val.main.humidity}%`;
+    const humidity = `${getDecimal(val.main.humidity)}%`;
     const icon = <Icon src={`http://openweathermap.org/img/wn/${val.weather[0].icon}@2x.png`} alt="アイコン" />;
     const speed = `${getDecimal(val.wind.speed)}m/s`;
 
