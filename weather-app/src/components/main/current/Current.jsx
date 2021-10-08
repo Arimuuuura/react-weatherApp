@@ -1,9 +1,9 @@
 import React, { useState, memo } from 'react'
 import styled from 'styled-components';
-import { Place } from '../Place';
-import { Main } from '../Main';
-import { Temp } from '../Temp';
-import { Detail } from '../Detail';
+import { Place } from './components/Place';
+import { Main } from './components/Main';
+import { Temp } from './components/Temp';
+import { Detail } from './components/Detail';
 
 const ToggleText = styled.p`
   font-size: 14px;
@@ -19,7 +19,7 @@ const ToggleText = styled.p`
 `
 
 
-export const MainArea = memo((props) => {
+export const Current = memo((props) => {
   // console.log("MainArea");
 
   const [isDetail, setIsDetail] = useState(false);

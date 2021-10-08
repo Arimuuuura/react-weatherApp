@@ -12,7 +12,7 @@ export const Footer = () => {
   return (
     <footer>
       <Container>
-        <p>© Yuki Arimura. 2019.</p>
+        <p>© Yuki Arimura. 2021.</p>
       </Container>
     </footer>
   )

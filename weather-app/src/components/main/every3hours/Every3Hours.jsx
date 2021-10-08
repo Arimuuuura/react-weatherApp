@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import styled from 'styled-components';
-import { getDecimal } from '../../function/calculation';
-import { useGetData } from '../../function/getData';
+import { getDecimal } from '../../../shared/util';
 
 const Container = styled.div`
   display: flex;
@@ -41,16 +40,15 @@ const Icon = styled.img`
   margin: 0 auto;
 `
 
-export const Every3Hours = memo(() => {
-  // console.log("Every3HoursArea");
+export const Every3Hours = memo((props) => {
 
-  const { weeklyData } = useGetData();
+  const { data } = props;
 
-  if (Object.keys(weeklyData).length === 0) return null;
-  const { cod, list} = weeklyData;
+  if (Object.keys(data).length === 0) return null;
+  const { cod, list} = data;
   // todo cod を使ってレスポンス結果の出し分け実装 cod : 200 or 404
 
-  const data = list.map((val, index) => {
+  const weeklyData = list.map((val, index) => {
     const id = index;
     const dt = `${new Date(val.dt * 1000).getHours()}時`;
     const temp = `${getDecimal(val.main.temp)}℃`;
@@ -79,7 +77,7 @@ export const Every3Hours = memo(() => {
       </TitleUl>
       <ContainerResult>
         {
-          data.map((val) => (
+          weeklyData.map((val) => (
             val.id < 8 ? (
               <ResultUl>
                 <li>{val.dt}</li>

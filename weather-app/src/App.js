@@ -1,25 +1,18 @@
 import React from 'react'
-import styled from 'styled-components';
-import { useGetData } from './function/getData';
-import { Controller } from './components/controls/Controller';
-
-const Container = styled.div`
-  border: 1px solid #333;
-`
+import { WeatherDataProvider } from './providers/WeatherDataProvider';
+import { Main } from './components/main/Main';
+import { Header } from './components/header/Header';
+import { Footer } from './components/footer/Footer';
 
 export const App = () => {
 
-  const { isLoading } = useGetData();
-
   return (
-    <Container>
-      {
-        isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <Controller />
-        )
-      }
-    </Container>
+    <>
+      <Header />
+      <WeatherDataProvider>
+        <Main />
+      </WeatherDataProvider>
+      <Footer />
+    </>
   )
 }

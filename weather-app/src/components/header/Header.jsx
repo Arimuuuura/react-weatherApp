@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import SunIcon from './images/sun.png'
-import StarIcon from './images/star.png'
+import SunIcon from '../images/sun.png'
+import StarIcon from '../images/star.png'
 
 const Container = styled.div`
   display: flex;

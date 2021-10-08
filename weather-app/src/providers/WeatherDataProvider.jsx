@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
 
-export const useGetData = () => {
+export const WeatherDataContext = createContext({});
+
+export const WeatherDataProvider = (props) => {
+  const { children } = props;
   const [currentData, setCurrentData] = useState({});
   const [weeklyData, setWeeklyData] = useState({});
   const [firstText, setFirstText] = useState('');
@@ -58,22 +61,28 @@ export const useGetData = () => {
   }
 
   const onClickGetZip = () => {
-    setZipCode(`${firstText}-${secondText}`);
     setCityCode('');
+    setZipCode(`${firstText}-${secondText}`);
   }
 
-  const onClickGetCity = () => {
-    setCityCode('1850144');
+  const onChangeGetCity = (e) => {
+    const code = e.target.value;
     setZipCode('');
-  }
-
-  return {
-    isLoading,
-    onChangeTextFirst,
-    onChangeTextSecond,
-    onClickGetZip,
-    onClickGetCity,
-    currentData,
-    weeklyData
-  }
+    setCityCode(code);
+  };
+  return (
+    <WeatherDataContext.Provider
+      value={{
+        isLoading,
+        onChangeTextFirst,
+        onChangeTextSecond,
+        onClickGetZip,
+        onChangeGetCity,
+        currentData,
+        weeklyData
+      }}
+    >
+      { children }
+    </WeatherDataContext.Provider>
+  )
 }

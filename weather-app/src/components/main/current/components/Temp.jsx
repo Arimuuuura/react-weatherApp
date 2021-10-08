@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { getDecimal } from '../function/calculation';
+import { getDecimal } from '../../../../shared/util';
 
 const Container = styled.div`
   text-align: center;
