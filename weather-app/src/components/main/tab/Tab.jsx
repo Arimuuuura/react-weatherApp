@@ -1,17 +1,17 @@
 import React, { useState, memo } from 'react'
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { City } from './components/City';
 import { Tabs as TabArea, Tab } from '@material-ui/core';
 import { TabPanel } from './components/TabPanel';
 import { SearchArea } from './components/SearchArea';
 
-const Container = styled.div`
-  background: rgba(0, 128, 128, 0.5);
-  padding: 16px;
-  & span {
-    margin: 16px;
-  }
-`
+// const Container = styled.div`
+//   background: rgba(0, 128, 128, 0.5);
+//   padding: 16px;
+//   & span {
+//     margin: 16px;
+//   }
+// `
 
 export const Tabs = memo(() => {
 
@@ -48,14 +48,14 @@ export const Tabs = memo(() => {
     <>
       <TabArea value={value} onChange={handleChange}>
         {
-          TabLabels.map(tab => (
-            <Tab label={tab.label} />
+          TabLabels.map((tab, index) => (
+            <Tab key={index} label={tab.label} />
           ))
         }
       </TabArea>
       {
-        TabDetails.map(detail => (
-          <TabPanel value={detail.value} index={detail.index}>{ detail.contents }</TabPanel>
+        TabDetails.map((detail, index) => (
+          <TabPanel key={index} value={detail.value} index={detail.index}>{ detail.contents }</TabPanel>
         ))
       }
     </>

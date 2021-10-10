@@ -52,12 +52,16 @@ export const WeatherDataProvider = (props) => {
     // eslint-disable-next-line
   }, [zipCode, cityCode]);
 
-  const onChangeTextFirst = (e) => {
-    setFirstText(e.target.value);
+
+  const onChangeFirstText = (e) => {
+    const firstText = e.target.value;
+    setFirstText(firstText);
+    // firstText.match(/^[0-9]{3}$/) && secondRef.current.focus();
   }
 
-  const onChangeTextSecond = (e) => {
-    setSecondText(e.target.value);
+  const onChangeSecondText = (e) => {
+    const secondText = e.target.value;
+    setSecondText(secondText);
   }
 
   const onClickGetZip = () => {
@@ -82,15 +86,15 @@ export const WeatherDataProvider = (props) => {
     <WeatherDataContext.Provider
       value={{
         isLoading,
-        onChangeTextFirst,
-        onChangeTextSecond,
+        onChangeFirstText,
+        onChangeSecondText,
         onClickGetZip,
         onClickClear,
         onChangeGetCity,
         currentData,
         weeklyData,
         firstText,
-        secondText
+        secondText,
       }}
     >
       { children }

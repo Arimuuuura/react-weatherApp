@@ -13,20 +13,22 @@ const Container = styled.div`
 `
 
 export const SearchArea = () => {
-  const { onChangeTextFirst, onChangeTextSecond, onClickGetZip, onClickClear, firstText, secondText } = useContext(WeatherDataContext);
+  const { onChangeFirstText, onChangeSecondText, onClickGetZip, onClickClear, firstText, secondText } = useContext(WeatherDataContext);
 
   const Inputs = [
     {
       before: "〒",
       placeholder: "100",
       value: firstText,
-      changeEvent: onChangeTextFirst,
+      changeEvent: onChangeFirstText,
+      autoFocus: true,
     },
     {
       before: "-",
       placeholder: "0000",
       value: secondText,
-      changeEvent: onChangeTextSecond,
+      changeEvent: onChangeSecondText,
+      autoFocus: null,
     },
   ];
 
@@ -46,16 +48,22 @@ export const SearchArea = () => {
   return (
     <Container>
       {
-        Inputs.map(input => (
+        Inputs.map((input, index) => (
           <>
             <span>{input.before}</span>
-            <Input placeholder={input.placeholder} value={input.value} onChange={input.changeEvent} />
+            <Input
+              key={`input-${index}`}
+              autoFocus={input.autoFocus}
+              placeholder={input.placeholder}
+              value={input.value}
+              onChange={input.changeEvent}
+            />
           </>
         ))
       }
       {
-        Buttons.map(button => (
-          <Button color={button.color} onClick={button.event}>{button.label}</Button>
+        Buttons.map((button, index) => (
+          <Button key={`button-${index}`} color={button.color} onClick={button.event}>{button.label}</Button>
         ))
       }
     </Container>

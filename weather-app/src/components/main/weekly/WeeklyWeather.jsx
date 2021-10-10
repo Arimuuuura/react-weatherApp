@@ -59,9 +59,9 @@ export const WeeklyWeather = memo(() => {
         </SUl>
       </div>
       {
-        data.map((val) => (
+        data.map((val, index) => (
           val.dt === 12 ? (
-            <SUl>
+            <SUl key={index}>
               <li>{val.dayOfWeek}</li>
               <li>{val.icon}</li>
               <li>{val.pop}</li>

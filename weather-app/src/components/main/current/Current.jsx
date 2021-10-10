@@ -19,15 +19,8 @@ const ToggleText = styled.p`
   }
 `
 
-
 export const Current = memo(() => {
-  // console.log("MainArea");
-
   const [isDetail, setIsDetail] = useState(false);
-
-  const Hide = styled.div`
-    ${isDetail ? {display: 'block'} : {display: 'none'}}
-  `
 
   const { currentData } = useContext(WeatherDataContext);
   if (Object.keys(currentData).length === 0) return null;
@@ -50,19 +43,21 @@ export const Current = memo(() => {
       <Main description={description} temp={temp} icon={icon} />
       <Temp temp_min={temp_min} temp_max={temp_max} feels_like={feels_like} />
       <ToggleText onClick={onClickDetail}>{isDetail ? "閉じる" : "詳しく見る"}</ToggleText>
-      <Hide>
-        <Detail
-          humidity={humidity}
-          pressure={pressure}
-          sunrise={sunrise}
-          sunset={sunset}
-          deg={deg}
-          speed={speed}
-          gust={gust}
-          all={all}
-          visibility={visibility}
-        />
-      </Hide>
+      {
+        isDetail && (
+          <Detail
+            humidity={humidity}
+            pressure={pressure}
+            sunrise={sunrise}
+            sunset={sunset}
+            deg={deg}
+            speed={speed}
+            gust={gust}
+            all={all}
+            visibility={visibility}
+          />
+        )
+      }
     </>
   )
 })

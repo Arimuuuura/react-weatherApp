@@ -46,7 +46,7 @@ export const Every3Hours = memo(() => {
   const { weeklyData } = useContext(WeatherDataContext);
 
   if (Object.keys(weeklyData).length === 0) return null;
-  const { cod, list} = weeklyData;
+  const { cod, list } = weeklyData;
   // todo cod を使ってレスポンス結果の出し分け実装 cod : 200 or 404
 
   const data = list.map((val, index) => {
@@ -78,9 +78,9 @@ export const Every3Hours = memo(() => {
       </TitleUl>
       <ContainerResult>
         {
-          data.map((val) => (
+          data.map((val, index) => (
             val.id < 8 ? (
-              <ResultUl>
+              <ResultUl key={index}>
                 <li>{val.dt}</li>
                 <li>{val.icon}</li>
                 <li>{val.temp}</li>
