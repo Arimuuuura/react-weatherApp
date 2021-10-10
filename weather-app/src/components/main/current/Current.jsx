@@ -1,9 +1,10 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useContext } from 'react'
 import styled from 'styled-components';
 import { Place } from './components/Place';
 import { Main } from './components/Main';
 import { Temp } from './components/Temp';
 import { Detail } from './components/Detail';
+import { WeatherDataContext } from '../../../providers/WeatherDataProvider';
 
 const ToggleText = styled.p`
   font-size: 14px;
@@ -19,7 +20,7 @@ const ToggleText = styled.p`
 `
 
 
-export const Current = memo((props) => {
+export const Current = memo(() => {
   // console.log("MainArea");
 
   const [isDetail, setIsDetail] = useState(false);
@@ -28,10 +29,10 @@ export const Current = memo((props) => {
     ${isDetail ? {display: 'block'} : {display: 'none'}}
   `
 
-  const { data } = props;
-  if (Object.keys(data).length === 0) return null;
+  const { currentData } = useContext(WeatherDataContext);
+  if (Object.keys(currentData).length === 0) return null;
 
-  const { name, main, weather, wind, clouds, visibility, sys } = data;
+  const { name, main, weather, wind, clouds, visibility, sys } = currentData;
   const { temp, temp_min, temp_max, feels_like, humidity, pressure } = main;
   const [{ description, icon }] = weather;
   const { deg, gust, speed } = wind;
@@ -45,7 +46,7 @@ export const Current = memo((props) => {
 
   return (
     <>
-      <Place data={data}>{name}</Place>
+      <Place data={currentData}>{name}</Place>
       <Main description={description} temp={temp} icon={icon} />
       <Temp temp_min={temp_min} temp_max={temp_max} feels_like={feels_like} />
       <ToggleText onClick={onClickDetail}>{isDetail ? "閉じる" : "詳しく見る"}</ToggleText>

@@ -1,5 +1,6 @@
-import React, { memo } from 'react'
+import React, { memo, useContext } from 'react'
 import styled from 'styled-components';
+import { WeatherDataContext } from '../../../providers/WeatherDataProvider';
 import { getDecimal } from '../../../shared/util';
 
 const SUl = styled.ul`
@@ -18,14 +19,14 @@ const Icon = styled.img`
   margin: 0 auto;
 `
 
-export const WeeklyWeather = memo((props) => {
-  const { data } = props;
+export const WeeklyWeather = memo(() => {
+  const { weeklyData } = useContext(WeatherDataContext);
 
-  if (Object.keys(data).length === 0) return null;
-  const { cod, list} = data;
+  if (Object.keys(weeklyData).length === 0) return null;
+  const { cod, list} = weeklyData;
   // todo cod を使ってレスポンス結果の出し分け実装 cod : 200 or 404
 
-  const weeklyData = list.map((val, index) => {
+  const data = list.map((val, index) => {
     const id = index;
     const dt = new Date(val.dt * 1000).getHours();
     const getDay = new Date(val.dt * 1000).getDay();
@@ -58,7 +59,7 @@ export const WeeklyWeather = memo((props) => {
         </SUl>
       </div>
       {
-        weeklyData.map((val) => (
+        data.map((val) => (
           val.dt === 12 ? (
             <SUl>
               <li>{val.dayOfWeek}</li>

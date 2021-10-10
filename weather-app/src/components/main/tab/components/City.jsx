@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { WeatherDataContext } from '../../../../providers/WeatherDataProvider';
 import { CITYCODE } from './constants/cityData'
 
 const Code = CITYCODE;
 
-export const City = (props) => {
+export const City = () => {
 
-  const { onChange } = props;
+  const { onChangeGetCity } = useContext(WeatherDataContext);
 
   return (
     <div>
-      <select onChange={onChange}>
+      <select onChange={onChangeGetCity}>
         {
           Code.map(({name, code}, index) => (
             <option key={index} value={code}>{name}</option>

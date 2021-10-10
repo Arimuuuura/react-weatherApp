@@ -1,5 +1,6 @@
-import React, { memo } from 'react'
+import React, { memo, useContext } from 'react'
 import styled from 'styled-components';
+import { WeatherDataContext } from '../../../providers/WeatherDataProvider';
 import { getDecimal } from '../../../shared/util';
 
 const Container = styled.div`
@@ -40,15 +41,15 @@ const Icon = styled.img`
   margin: 0 auto;
 `
 
-export const Every3Hours = memo((props) => {
+export const Every3Hours = memo(() => {
 
-  const { data } = props;
+  const { weeklyData } = useContext(WeatherDataContext);
 
-  if (Object.keys(data).length === 0) return null;
-  const { cod, list} = data;
+  if (Object.keys(weeklyData).length === 0) return null;
+  const { cod, list} = weeklyData;
   // todo cod を使ってレスポンス結果の出し分け実装 cod : 200 or 404
 
-  const weeklyData = list.map((val, index) => {
+  const data = list.map((val, index) => {
     const id = index;
     const dt = `${new Date(val.dt * 1000).getHours()}時`;
     const temp = `${getDecimal(val.main.temp)}℃`;
@@ -77,7 +78,7 @@ export const Every3Hours = memo((props) => {
       </TitleUl>
       <ContainerResult>
         {
-          weeklyData.map((val) => (
+          data.map((val) => (
             val.id < 8 ? (
               <ResultUl>
                 <li>{val.dt}</li>

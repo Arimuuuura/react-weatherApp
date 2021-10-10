@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const SearchButton = styled.button`
+const SButton = styled.button`
   cursor: pointer;
   display: inline-block;
   box-sizing: border-box;
@@ -12,7 +12,7 @@ const SearchButton = styled.button`
   color: white;
   height: 40px;
   padding: 0 24px;
-  background-color: skyblue;
+  // background-color: skyblue;
   margin: 16px;
 `
 
@@ -22,7 +22,7 @@ export const Button = (props) => {
 
   return (
     <>
-      <SearchButton onClick={onClick}>{ children }</SearchButton>
+      <SButton onClick={onClick}>{ children }</SButton>
     </>
   )
 }

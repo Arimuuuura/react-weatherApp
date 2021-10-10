@@ -13,9 +13,8 @@ const Container = styled.div`
   }
 `
 
-export const Tabs = memo((props) => {
+export const Tabs = memo(() => {
 
-  const { first, second, onClick, onChange } = props;
   const [value, setValue] = useState(0);
 
   const TabLabels = [
@@ -32,16 +31,12 @@ export const Tabs = memo((props) => {
       value: value,
       index: 0,
       contents:
-      <SearchArea
-        first={first}
-        second={second}
-        onClick={onClick}
-      />,
+      <SearchArea />,
     },
     {
       value: value,
       index: 1,
-      contents: <City onChange={onChange} />
+      contents: <City />
     },
   ];
 

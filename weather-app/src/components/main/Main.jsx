@@ -15,7 +15,7 @@ import { WeatherDataContext } from '../../providers/WeatherDataProvider';
 // `
 
 export const Main = memo(() => {
-  const { isLoading, currentData, weeklyData, onChangeTextFirst, onChangeTextSecond, onClickGetZip, onChangeGetCity } = useContext(WeatherDataContext);
+  const { isLoading } = useContext(WeatherDataContext);
 
   return (
     <>
@@ -24,10 +24,10 @@ export const Main = memo(() => {
           <p>Loading...</p>
         ) : (
           <>
-            <Tabs first={onChangeTextFirst} second={onChangeTextSecond} onClick={onClickGetZip} onChange={onChangeGetCity} />
-            <Current data={currentData} />
-            <Every3Hours data={weeklyData} />
-            <WeeklyWeather data={weeklyData} />
+            <Tabs />
+            <Current />
+            <Every3Hours />
+            <WeeklyWeather />
           </>
         )
       }
