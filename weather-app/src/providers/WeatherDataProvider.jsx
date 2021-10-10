@@ -70,6 +70,12 @@ export const WeatherDataProvider = (props) => {
     setZipCode('');
     setCityCode(code);
   };
+
+  const onClickClear = () => {
+    setCityCode('1850144');
+    setZipCode('');
+  };
+
   return (
     <WeatherDataContext.Provider
       value={{
@@ -77,6 +83,7 @@ export const WeatherDataProvider = (props) => {
         onChangeTextFirst,
         onChangeTextSecond,
         onClickGetZip,
+        onClickClear,
         onChangeGetCity,
         currentData,
         weeklyData

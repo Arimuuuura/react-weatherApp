@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
+import { WeatherDataContext } from '../../../../providers/WeatherDataProvider';
 import { Button } from './button/Button';
 import { Input } from './Input';
 
@@ -11,21 +12,27 @@ const Container = styled.div`
   }
 `
 
-export const SearchArea = (props) => {
-  const { onClick, first, second } = props;
+export const SearchArea = () => {
+  const { onChangeTextFirst, onChangeTextSecond, onClickGetZip, onClickClear } = useContext(WeatherDataContext);
 
   const Inputs = [
     {
       before: "〒",
       placeholder: "100",
-      changeEvent: first,
+      changeEvent: onChangeTextFirst,
     },
     {
       before: "-",
       placeholder: "0000",
-      changeEvent: second,
+      changeEvent: onChangeTextSecond,
     },
-  ]
+  ];
+
+  const Buttons = [
+    {
+
+    }
+  ];
 
   return (
     <Container>
@@ -37,7 +44,8 @@ export const SearchArea = (props) => {
           </>
         ))
       }
-      <Button onClick={onClick}>検索</Button>
+      <Button onClick={onClickGetZip}>検索</Button>
+      <Button onClick={onClickClear}>クリア</Button>
     </Container>
   )
 }
