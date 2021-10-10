@@ -12,11 +12,11 @@ const SInput = styled.input`
 
 export const Input = (props) => {
 
-  const { onChange, placeholder } = props;
+  const { onChange, placeholder, value } = props;
 
   return (
     <>
-      <SInput onChange={onChange} placeholder={placeholder} />
+      <SInput value={value} onChange={onChange} placeholder={placeholder} />
     </>
   )
 }

@@ -13,24 +13,33 @@ const Container = styled.div`
 `
 
 export const SearchArea = () => {
-  const { onChangeTextFirst, onChangeTextSecond, onClickGetZip, onClickClear } = useContext(WeatherDataContext);
+  const { onChangeTextFirst, onChangeTextSecond, onClickGetZip, onClickClear, firstText, secondText } = useContext(WeatherDataContext);
 
   const Inputs = [
     {
       before: "〒",
       placeholder: "100",
+      value: firstText,
       changeEvent: onChangeTextFirst,
     },
     {
       before: "-",
       placeholder: "0000",
+      value: secondText,
       changeEvent: onChangeTextSecond,
     },
   ];
 
   const Buttons = [
     {
-
+      event: onClickGetZip,
+      label: "検索",
+      color: "skyblue",
+    },
+    {
+      event: onClickClear,
+      label: "クリア",
+      color: "green",
     }
   ];
 
@@ -40,12 +49,15 @@ export const SearchArea = () => {
         Inputs.map(input => (
           <>
             <span>{input.before}</span>
-            <Input placeholder={input.placeholder} onChange={input.changeEvent} />
+            <Input placeholder={input.placeholder} value={input.value} onChange={input.changeEvent} />
           </>
         ))
       }
-      <Button onClick={onClickGetZip}>検索</Button>
-      <Button onClick={onClickClear}>クリア</Button>
+      {
+        Buttons.map(button => (
+          <Button color={button.color} onClick={button.event}>{button.label}</Button>
+        ))
+      }
     </Container>
   )
 }

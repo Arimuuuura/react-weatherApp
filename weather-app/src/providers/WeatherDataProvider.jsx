@@ -74,6 +74,8 @@ export const WeatherDataProvider = (props) => {
   const onClickClear = () => {
     setCityCode('1850144');
     setZipCode('');
+    setFirstText('');
+    setSecondText('');
   };
 
   return (
@@ -86,7 +88,9 @@ export const WeatherDataProvider = (props) => {
         onClickClear,
         onChangeGetCity,
         currentData,
-        weeklyData
+        weeklyData,
+        firstText,
+        secondText
       }}
     >
       { children }
