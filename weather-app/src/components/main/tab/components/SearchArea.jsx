@@ -4,12 +4,19 @@ import { WeatherDataContext } from '../../../../providers/WeatherDataProvider';
 import { Button } from './button/Button';
 import { Input } from './Input';
 
-const Container = styled.div`
-  background: rgba(0, 128, 128, 0.5);
-  padding: 16px;
-  & span {
-    margin: 16px;
-  }
+const InputContainer = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  margin-top: 16px;
+  line-height: 40px;
+`
+
+const ButtonContainer = styled.div`
+  text-align: center;
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-evenly;
 `
 
 export const SearchArea = () => {
@@ -46,26 +53,30 @@ export const SearchArea = () => {
   ];
 
   return (
-    <Container>
-      {
-        Inputs.map((input, index) => (
-          <>
-            <span>{input.before}</span>
-            <Input
-              key={`input-${index}`}
-              autoFocus={input.autoFocus}
-              placeholder={input.placeholder}
-              value={input.value}
-              onChange={input.changeEvent}
-            />
-          </>
-        ))
-      }
-      {
-        Buttons.map((button, index) => (
-          <Button key={`button-${index}`} color={button.color} onClick={button.event}>{button.label}</Button>
-        ))
-      }
-    </Container>
+    <>
+      <InputContainer>
+        {
+          Inputs.map((input, index) => (
+            <>
+              <span>{input.before}</span>
+              <Input
+                key={`input-${index}`}
+                autoFocus={input.autoFocus}
+                placeholder={input.placeholder}
+                value={input.value}
+                onChange={input.changeEvent}
+              />
+            </>
+          ))
+        }
+      </InputContainer>
+      <ButtonContainer>
+        {
+          Buttons.map((button, index) => (
+            <Button key={`button-${index}`} color={button.color} onClick={button.event}>{button.label}</Button>
+          ))
+        }
+      </ButtonContainer>
+    </>
   )
 }

@@ -14,7 +14,6 @@ const SButton = styled.button`
   color: white;
   height: 40px;
   padding: 0 24px;
-  margin: 16px;
   &: hover {
     box-shadow: 2px 2px 4px gray;
     opacity: .7;
