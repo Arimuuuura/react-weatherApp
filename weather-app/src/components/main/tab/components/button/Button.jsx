@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const SButton = styled.button`
+  font-family: 'Yusei Magic', sans-serif;
   cursor: pointer;
   display: inline-block;
   border: none;
