@@ -12,6 +12,7 @@ export const WeatherDataProvider = (props) => {
   const [zipCode, setZipCode] = useState('')
   const [cityCode, setCityCode] = useState('1850144')
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   const API_KEY = process.env.REACT_APP_API_KEY;
   const CURRENT_WEATHER_URL = process.env.REACT_APP_CURRENT_WEATHER_URL;
@@ -31,8 +32,10 @@ export const WeatherDataProvider = (props) => {
       ).then((res) => {
         setCurrentData(res.data);
         setIsLoading(false);
+        setError(false);
       }).catch((err) => {
         console.log(err);
+        setError(true);
       });
     };
 
@@ -42,8 +45,10 @@ export const WeatherDataProvider = (props) => {
       ).then((res) => {
         setWeeklyData(res.data);
         setIsLoading(false);
+        setError(false);
       }).catch((err) => {
         console.log(err);
+        setError(true);
       });
     };
 
@@ -80,6 +85,7 @@ export const WeatherDataProvider = (props) => {
     setZipCode('');
     setFirstText('');
     setSecondText('');
+    setError(false);
   };
 
   return (
@@ -95,6 +101,7 @@ export const WeatherDataProvider = (props) => {
         weeklyData,
         firstText,
         secondText,
+        error,
       }}
     >
       { children }

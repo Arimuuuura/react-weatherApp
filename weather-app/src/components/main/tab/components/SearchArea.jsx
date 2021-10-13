@@ -19,8 +19,14 @@ const ButtonContainer = styled.div`
   justify-content: space-evenly;
 `
 
+const ErrorMessage = styled.p`
+  margin: 24px auto 0;
+  color: red;
+  font-family: 'Yusei Magic', sans-serif;
+`
+
 export const SearchArea = () => {
-  const { onChangeFirstText, onChangeSecondText, onClickGetZip, onClickClear, firstText, secondText } = useContext(WeatherDataContext);
+  const { onChangeFirstText, onChangeSecondText, onClickGetZip, onClickClear, firstText, secondText, error } = useContext(WeatherDataContext);
 
   const Inputs = [
     {
@@ -57,19 +63,21 @@ export const SearchArea = () => {
       <InputContainer>
         {
           Inputs.map((input, index) => (
-            <>
+            <React.Fragment key={`input-${index}`}>
               <span>{input.before}</span>
               <Input
-                key={`input-${index}`}
                 autoFocus={input.autoFocus}
                 placeholder={input.placeholder}
                 value={input.value}
                 onChange={input.changeEvent}
               />
-            </>
+            </React.Fragment>
           ))
         }
       </InputContainer>
+      {
+        error && <ErrorMessage>入力された郵便番号での検索はできません。他の番号を試してください。</ErrorMessage>
+      }
       <ButtonContainer>
         {
           Buttons.map((button, index) => (
