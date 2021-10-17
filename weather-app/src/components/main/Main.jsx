@@ -19,8 +19,6 @@ const ErrorMessage = styled.p`
 
 export const Main = memo(() => {
   const { isLoading, error } = useContext(WeatherDataContext);
-  console.log(`non : ${error.notFound}`);
-  console.log(`un : ${error.unexpected}`);
 
   return (
     <MainContainer>

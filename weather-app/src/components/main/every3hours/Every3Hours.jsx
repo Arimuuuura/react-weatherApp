@@ -46,8 +46,7 @@ export const Every3Hours = memo(() => {
   const { weeklyData } = useContext(WeatherDataContext);
 
   if (Object.keys(weeklyData).length === 0) return null;
-  const { cod, list } = weeklyData;
-  // console.log(cod);
+  const { list } = weeklyData;
 
   const data = list.map((val, index) => {
     const id = index;
