@@ -58,16 +58,19 @@ export const WeatherDataProvider = (props) => {
     // eslint-disable-next-line
   }, [zipCode, cityCode]);
 
-
+  // 入力された数字を半角数字に置き換える関数
   const isHankaku = (zipCode) => {
     return zipCode.replace(/[０-９]/g, (str) => {
-        return String.fromCharCode(str.charCodeAt(0) - 0xFEE0);
+      return String.fromCharCode(str.charCodeAt(0) - 0xFEE0);
     });
   }
 
   const onChangeFirstText = (e) => {
     const firstText = isHankaku(e.target.value);
     setFirstText(firstText);
+    if (firstText.match(/^[0-9]{3}$/)) {
+      // フォーカスを変える
+    }
   }
 
   const onChangeSecondText = (e) => {
@@ -78,11 +81,7 @@ export const WeatherDataProvider = (props) => {
     }
   }
 
-  const onClickSearch = () => {
-    setCityCode('');
-    setZipCode(`${firstText}-${secondText}`);
-  }
-
+  // 都道府県を変更したときのイベント
   const onChangeCity = (e) => {
     const code = e.target.value;
     setZipCode('');
@@ -92,6 +91,13 @@ export const WeatherDataProvider = (props) => {
     setCityCode(code);
   };
 
+  // 検索ボタンを押したときのイベント
+  const onClickSearch = () => {
+    setCityCode('');
+    setZipCode(`${firstText}-${secondText}`);
+  }
+
+  // クリアボタンを押したときのイベント
   const onClickClear = () => {
     setCityCode('1850144');
     setZipCode('');
