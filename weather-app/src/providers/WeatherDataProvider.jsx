@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
 export const WeatherDataContext = createContext({});
@@ -58,6 +58,17 @@ export const WeatherDataProvider = (props) => {
     // eslint-disable-next-line
   }, [zipCode, cityCode]);
 
+  // フォーカスの監視
+  const firstTextRef = useRef(null);
+  const secondTextRef = useRef(null);
+  useEffect(() => {
+    if (firstText.match(/^[0-9]{3}$/)) {
+      secondTextRef.current && secondTextRef.current.focus();
+    } else {
+      firstTextRef.current && firstTextRef.current.focus();
+    }
+  }, [isLoading, firstText])
+
   // 入力された数字を半角数字に置き換える関数
   const isHankaku = (zipCode) => {
     return zipCode.replace(/[０-９]/g, (str) => {
@@ -68,18 +79,21 @@ export const WeatherDataProvider = (props) => {
   const onChangeFirstText = (e) => {
     const firstText = isHankaku(e.target.value);
     setFirstText(firstText);
-    if (firstText.match(/^[0-9]{3}$/)) {
-      // フォーカスを変える
-    }
   }
 
   const onChangeSecondText = (e) => {
     const secondText = isHankaku(e.target.value);
     setSecondText(secondText);
+  }
+
+  // 検索ボタンの活性、非活性の監視
+  useEffect(() => {
     if (firstText.match(/^[0-9]{3}$/) && secondText.match(/^[0-9]{4}$/)) {
       setIsSearch(false);
+    } else {
+      setIsSearch(true);
     }
-  }
+  }, [firstText, secondText])
 
   // 都道府県を変更したときのイベント
   const onChangeCity = (e) => {
@@ -122,6 +136,8 @@ export const WeatherDataProvider = (props) => {
         secondText,
         error,
         isSearch,
+        firstTextRef,
+        secondTextRef,
       }}
     >
       { children }

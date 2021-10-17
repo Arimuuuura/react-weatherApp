@@ -26,8 +26,18 @@ const ErrorMessage = styled.p`
 `
 
 export const SearchArea = () => {
-  const { onChangeFirstText, onChangeSecondText, onClickSearch, onClickClear, firstText, secondText, error, isSearch } = useContext(WeatherDataContext);
-  console.log(isSearch);
+  const {
+    onChangeFirstText,
+    onChangeSecondText,
+    onClickSearch,
+    onClickClear,
+    firstText,
+    secondText,
+    error,
+    isSearch,
+    firstTextRef,
+    secondTextRef,
+  } = useContext(WeatherDataContext);
 
   const Inputs = [
     {
@@ -35,14 +45,14 @@ export const SearchArea = () => {
       placeholder: "100",
       value: firstText,
       changeEvent: onChangeFirstText,
-      autoFocus: true,
+      ref: firstTextRef,
     },
     {
       before: "-",
       placeholder: "0000",
       value: secondText,
       changeEvent: onChangeSecondText,
-      autoFocus: null,
+      ref: secondTextRef,
     },
   ];
 
@@ -69,7 +79,7 @@ export const SearchArea = () => {
             <React.Fragment key={`input-${index}`}>
               <span>{input.before}</span>
               <Input
-                autoFocus={input.autoFocus}
+                isFocus={input.ref}
                 placeholder={input.placeholder}
                 value={input.value}
                 onChange={input.changeEvent}

@@ -12,11 +12,11 @@ const SInput = styled.input`
 
 export const Input = (props) => {
 
-  const { onChange, placeholder, value, autoFocus } = props;
+  const { onChange, placeholder, value, isFocus } = props;
 
   return (
     <>
-      <SInput autoFocus={autoFocus} type="text" value={value} onChange={onChange} placeholder={placeholder} />
+      <SInput ref={isFocus} type="text" value={value} onChange={onChange} placeholder={placeholder} />
     </>
   )
 }
