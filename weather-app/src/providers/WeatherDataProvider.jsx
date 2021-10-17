@@ -125,19 +125,19 @@ export const WeatherDataProvider = (props) => {
     <WeatherDataContext.Provider
       value={{
         isLoading,
+        firstText,
+        secondText,
+        firstTextRef,
+        secondTextRef,
         onChangeFirstText,
         onChangeSecondText,
+        isSearch,
         onClickSearch,
         onClickClear,
         onChangeCity,
         currentData,
         weeklyData,
-        firstText,
-        secondText,
         error,
-        isSearch,
-        firstTextRef,
-        secondTextRef,
       }}
     >
       { children }
