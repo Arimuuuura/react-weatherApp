@@ -19,13 +19,7 @@ const ButtonContainer = styled.div`
   justify-content: space-evenly;
 `
 
-const ErrorMessage = styled.p`
-  margin: 24px auto 0;
-  color: red;
-  font-family: 'Yusei Magic', sans-serif;
-`
-
-export const SearchArea = () => {
+export const Search = () => {
   const {
     firstText,
     secondText,
@@ -36,7 +30,6 @@ export const SearchArea = () => {
     isSearch,
     onClickSearch,
     onClickClear,
-    error,
   } = useContext(WeatherDataContext);
 
   const Inputs = [
@@ -88,9 +81,6 @@ export const SearchArea = () => {
           ))
         }
       </InputContainer>
-      {
-        error && <ErrorMessage>入力された郵便番号での検索はできません。他の番号を試してください。</ErrorMessage>
-      }
       <ButtonContainer>
         {
           Buttons.map((button, index) => (

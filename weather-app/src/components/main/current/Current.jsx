@@ -25,12 +25,13 @@ export const Current = memo(() => {
   const { currentData } = useContext(WeatherDataContext);
   if (Object.keys(currentData).length === 0) return null;
 
-  const { name, main, weather, wind, clouds, visibility, sys } = currentData;
+  const { name, main, weather, wind, clouds, visibility, sys, cod } = currentData;
   const { temp, temp_min, temp_max, feels_like, humidity, pressure } = main;
   const [{ description, icon }] = weather;
   const { deg, gust, speed } = wind;
   const { all } = clouds;
   const { sunrise, sunset } = sys;
+  // console.log(cod);
 
   const onClickDetail = () => {
     // todo ゆっくりアニメーションできない

@@ -23,8 +23,7 @@ export const WeeklyWeather = memo(() => {
   const { weeklyData } = useContext(WeatherDataContext);
 
   if (Object.keys(weeklyData).length === 0) return null;
-  const { cod, list} = weeklyData;
-  // todo cod を使ってレスポンス結果の出し分け実装 cod : 200 or 404
+  const { list} = weeklyData;
 
   const data = list.map((val, index) => {
     const id = index;

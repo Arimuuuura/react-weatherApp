@@ -12,7 +12,7 @@ export const WeatherDataProvider = (props) => {
   const [zipCode, setZipCode] = useState('')
   const [cityCode, setCityCode] = useState('1850144')
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState({});
   const [isSearch, setIsSearch] = useState(true)
 
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -26,6 +26,9 @@ export const WeatherDataProvider = (props) => {
   const getCurrentApiUrl = `${CURRENT_WEATHER_URL}${query}`;
   const getWeeklyApiUrl = `${WEEKLY_WEATHER_URL}${query}`;
 
+  const notFoundMessage = '入力された郵便番号での検索はできません。他の番号を試してください。';
+  const unexpectedMessage = '予期せぬエラーが発生しました。しばらく時間を置いて、試してください。';
+
   useEffect(() => {
     const fetchCurrentData = async () => {
       await axios.get(
@@ -36,7 +39,12 @@ export const WeatherDataProvider = (props) => {
         setError(false);
       }).catch((err) => {
         console.log(err);
-        setError(true);
+        // ステータスコードによるエラーメッセージの出し分け
+        err.response.status === 404 ? setError({
+          notFound: notFoundMessage,
+        }) : setError({
+          unexpected: unexpectedMessage,
+        })
       });
     };
 
@@ -49,7 +57,12 @@ export const WeatherDataProvider = (props) => {
         setError(false);
       }).catch((err) => {
         console.log(err);
-        setError(true);
+        // ステータスコードによるエラーメッセージの出し分け
+        err.response.status === 404 ? setError({
+          notFound: notFoundMessage,
+        }) : setError({
+          unexpected: unexpectedMessage,
+        })
       });
     };
 

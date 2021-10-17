@@ -47,7 +47,7 @@ export const Every3Hours = memo(() => {
 
   if (Object.keys(weeklyData).length === 0) return null;
   const { cod, list } = weeklyData;
-  // todo cod を使ってレスポンス結果の出し分け実装 cod : 200 or 404
+  // console.log(cod);
 
   const data = list.map((val, index) => {
     const id = index;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { City } from './components/City';
 import { Tabs as TabArea, Tab } from '@material-ui/core';
 import { TabPanel } from './components/TabPanel';
-import { SearchArea } from './components/SearchArea';
+import { Search } from './components/Search';
 import { TabDetailContainer } from './components/TabDetailContainer';
 
 const Container = styled(TabArea)`
@@ -44,7 +44,7 @@ export const Tabs = memo(() => {
       value: value,
       index: 0,
       contents:
-      <SearchArea />,
+      <Search />,
     },
     {
       value: value,
