@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components';
 
 const CityName = styled.h2`
@@ -7,7 +7,7 @@ const CityName = styled.h2`
   padding: 16px 0;
 `
 
-export const Place = (props) => {
+export const Place = memo((props) => {
 
   const { children } = props;
 
@@ -16,4 +16,4 @@ export const Place = (props) => {
       <CityName>{children}</CityName>
     </>
   )
-}
+})

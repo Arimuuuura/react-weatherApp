@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -8,11 +8,11 @@ const Container = styled.div`
   border-radius: 5px;
 `
 
-export const TabDetailContainer = (props) => {
+export const TabDetailContainer = memo((props) => {
   const { children } = props;
   return (
     <Container>
       { children }
     </Container>
   )
-}
+})

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { memo, useContext } from 'react'
 import styled from 'styled-components';
 import { WeatherDataContext } from '../../../../providers/WeatherDataProvider';
 import { Button } from './button/Button';
@@ -19,7 +19,7 @@ const ButtonContainer = styled.div`
   justify-content: space-evenly;
 `
 
-export const Search = () => {
+export const Search = memo(() => {
   const {
     firstText,
     secondText,
@@ -90,4 +90,4 @@ export const Search = () => {
       </ButtonContainer>
     </>
   )
-}
+})

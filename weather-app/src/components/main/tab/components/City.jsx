@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { memo, useContext } from 'react'
 import styled from 'styled-components';
 import { WeatherDataContext } from '../../../../providers/WeatherDataProvider';
 import { CITYCODE } from './constants/cityData'
@@ -22,7 +22,7 @@ const SelectBox = styled.select`
   font-size: 16px;
 `
 
-export const City = () => {
+export const City = memo(() => {
 
   const { onChangeCity } = useContext(WeatherDataContext);
 
@@ -38,4 +38,4 @@ export const City = () => {
       </SelectBox>
     </Container>
   )
-}
+})

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components';
 import { getDecimal } from '../../../../shared/util';
 
@@ -17,7 +17,7 @@ const Container = styled.div`
   }
 `
 
-export const Temp = (props) => {
+export const Temp = memo((props) => {
 
   const { temp_min, temp_max, feels_like } = props;
 
@@ -28,4 +28,4 @@ export const Temp = (props) => {
       <p className="feels_like">{`体感 ${getDecimal(feels_like)}℃`}</p>
     </Container>
   )
-}
+})

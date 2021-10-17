@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 
 const SButton = styled.button`
@@ -21,7 +21,7 @@ const SButton = styled.button`
   }
 `
 
-export const Button = (props) => {
+export const Button = memo((props) => {
 
   const { onClick, children, color, disabled } = props;
 
@@ -30,4 +30,4 @@ export const Button = (props) => {
       <SButton style={{backgroundColor: color, opacity: disabled && '.3'}} disabled={disabled} onClick={onClick}>{ children }</SButton>
     </>
   )
-}
+})

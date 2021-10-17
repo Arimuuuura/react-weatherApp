@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components';
 import { getDecimal } from '../../../../shared/util';
 
@@ -10,7 +10,7 @@ const Container = styled.div`
   padding: 16px 0;
 `
 
-export const Detail = (props) => {
+export const Detail = memo((props) => {
 
   const {
     humidity,
@@ -67,4 +67,4 @@ export const Detail = (props) => {
       </Container>
     </>
   )
-}
+})

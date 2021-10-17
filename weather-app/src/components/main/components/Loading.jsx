@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import spinner from '../../images/spinner.gif'
 
@@ -17,11 +17,11 @@ const Spinner = styled.img`
   display: block;
 `
 
-export const Loading = () => {
+export const Loading = memo(() => {
   return (
     <>
       <LoadingText>Loading..</LoadingText>
       <Spinner src={ spinner } alt='Loading' />
     </>
   )
-}
+})

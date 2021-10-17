@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components';
 import SunIcon from '../images/sun.png'
 import StarIcon from '../images/star.png'
@@ -21,7 +21,7 @@ const Container = styled.div`
   }
 `
 
-export const Header = () => {
+export const Header = memo(() => {
   return (
     <header>
       <Container>
@@ -31,4 +31,4 @@ export const Header = () => {
       </Container>
     </header>
   )
-}
+})

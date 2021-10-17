@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -8,7 +8,7 @@ const Container = styled.div`
   background-color: rgba(0, 128, 128, 0.5);
 `
 
-export const Footer = () => {
+export const Footer = memo(() => {
   return (
     <footer>
       <Container>
@@ -16,4 +16,4 @@ export const Footer = () => {
       </Container>
     </footer>
   )
-}
+})

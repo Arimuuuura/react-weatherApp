@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components';
 import { getDecimal } from '../../../../shared/util';
 
@@ -12,7 +12,7 @@ const TextContainer = styled.div`
   margin: 16px auto;
 `
 
-export const Main = (props) => {
+export const Main = memo((props) => {
 
   const { description, temp, icon } = props;
   const imgUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
@@ -26,4 +26,4 @@ export const Main = (props) => {
       <img src={imgUrl} alt="アイコン" />
     </Container>
   )
-}
+})
