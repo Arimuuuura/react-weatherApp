@@ -13,6 +13,7 @@ export const WeatherDataProvider = (props) => {
   const [cityCode, setCityCode] = useState('1850144')
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [isSearch, setIsSearch] = useState(true)
 
   const API_KEY = process.env.REACT_APP_API_KEY;
   const CURRENT_WEATHER_URL = process.env.REACT_APP_CURRENT_WEATHER_URL;
@@ -58,25 +59,36 @@ export const WeatherDataProvider = (props) => {
   }, [zipCode, cityCode]);
 
 
+  const isHankaku = (zipCode) => {
+    return zipCode.replace(/[０-９]/g, (str) => {
+        return String.fromCharCode(str.charCodeAt(0) - 0xFEE0);
+    });
+  }
+
   const onChangeFirstText = (e) => {
-    const firstText = e.target.value;
+    const firstText = isHankaku(e.target.value);
     setFirstText(firstText);
-    // firstText.match(/^[0-9]{3}$/) && secondRef.current.focus();
   }
 
   const onChangeSecondText = (e) => {
-    const secondText = e.target.value;
+    const secondText = isHankaku(e.target.value);
     setSecondText(secondText);
+    if (firstText.match(/^[0-9]{3}$/) && secondText.match(/^[0-9]{4}$/)) {
+      setIsSearch(false);
+    }
   }
 
-  const onClickGetZip = () => {
+  const onClickSearch = () => {
     setCityCode('');
     setZipCode(`${firstText}-${secondText}`);
   }
 
-  const onChangeGetCity = (e) => {
+  const onChangeCity = (e) => {
     const code = e.target.value;
     setZipCode('');
+    setFirstText('');
+    setSecondText('');
+    setIsSearch(true);
     setCityCode(code);
   };
 
@@ -86,6 +98,7 @@ export const WeatherDataProvider = (props) => {
     setFirstText('');
     setSecondText('');
     setError(false);
+    setIsSearch(true);
   };
 
   return (
@@ -94,14 +107,15 @@ export const WeatherDataProvider = (props) => {
         isLoading,
         onChangeFirstText,
         onChangeSecondText,
-        onClickGetZip,
+        onClickSearch,
         onClickClear,
-        onChangeGetCity,
+        onChangeCity,
         currentData,
         weeklyData,
         firstText,
         secondText,
         error,
+        isSearch,
       }}
     >
       { children }

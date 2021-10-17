@@ -24,12 +24,12 @@ const SelectBox = styled.select`
 
 export const City = () => {
 
-  const { onChangeGetCity } = useContext(WeatherDataContext);
+  const { onChangeCity } = useContext(WeatherDataContext);
 
   return (
     <Container>
       <H2>都道府県を選択してください</H2>
-      <SelectBox onChange={onChangeGetCity}>
+      <SelectBox onChange={onChangeCity}>
         {
           Code.map(({name, code}, index) => (
             <option key={index} value={code}>{name}</option>

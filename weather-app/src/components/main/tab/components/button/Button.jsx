@@ -17,17 +17,17 @@ const SButton = styled.button`
   padding: 0 24px;
   &: hover {
     box-shadow: 2px 2px 4px gray;
-    opacity: .7;
+    opacity: .8;
   }
 `
 
 export const Button = (props) => {
 
-  const { onClick, children, color } = props;
+  const { onClick, children, color, disabled } = props;
 
   return (
     <>
-      <SButton style={{backgroundColor: color}} onClick={onClick}>{ children }</SButton>
+      <SButton style={{backgroundColor: color, opacity: disabled && '.3'}} disabled={disabled} onClick={onClick}>{ children }</SButton>
     </>
   )
 }

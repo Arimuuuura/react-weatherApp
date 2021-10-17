@@ -26,7 +26,8 @@ const ErrorMessage = styled.p`
 `
 
 export const SearchArea = () => {
-  const { onChangeFirstText, onChangeSecondText, onClickGetZip, onClickClear, firstText, secondText, error } = useContext(WeatherDataContext);
+  const { onChangeFirstText, onChangeSecondText, onClickSearch, onClickClear, firstText, secondText, error, isSearch } = useContext(WeatherDataContext);
+  console.log(isSearch);
 
   const Inputs = [
     {
@@ -47,14 +48,16 @@ export const SearchArea = () => {
 
   const Buttons = [
     {
-      event: onClickGetZip,
+      event: onClickSearch,
       label: "検索",
-      color: "skyblue",
+      color: "#007bff",
+      disabled: isSearch,
     },
     {
       event: onClickClear,
       label: "クリア",
       color: "green",
+      disabled: false,
     }
   ];
 
@@ -81,7 +84,7 @@ export const SearchArea = () => {
       <ButtonContainer>
         {
           Buttons.map((button, index) => (
-            <Button key={`button-${index}`} color={button.color} onClick={button.event}>{button.label}</Button>
+            <Button key={`button-${index}`} disabled={button.disabled} color={button.color} onClick={button.event}>{button.label}</Button>
           ))
         }
       </ButtonContainer>
