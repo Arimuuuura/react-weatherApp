@@ -1,10 +1,11 @@
-import React, { useState, memo, useContext } from 'react'
+import React, { memo, useContext } from 'react'
 import styled from 'styled-components';
 import { Place } from './components/Place';
 import { Main } from './components/Main';
 import { Temp } from './components/Temp';
 import { Detail } from './components/Detail';
 import { WeatherDataContext } from '../../../providers/WeatherDataProvider';
+import { useDetail } from './components/useDetail';
 
 const ToggleText = styled.p`
   font-size: 14px;
@@ -20,7 +21,7 @@ const ToggleText = styled.p`
 `
 
 export const Current = memo(() => {
-  const [isDetail, setIsDetail] = useState(false);
+  const { isDetail, onClickDetail } = useDetail();
 
   const { currentData } = useContext(WeatherDataContext);
   if (Object.keys(currentData).length === 0) return null;
@@ -32,30 +33,29 @@ export const Current = memo(() => {
   const { all } = clouds;
   const { sunrise, sunset } = sys;
 
-  const onClickDetail = () => {
-    // todo ゆっくりアニメーションできない
-    setIsDetail(!isDetail);
-  }
-
   return (
     <>
       <Place data={currentData}>{name}</Place>
       <Main description={description} temp={temp} icon={icon} />
       <Temp temp_min={temp_min} temp_max={temp_max} feels_like={feels_like} />
-      <ToggleText onClick={onClickDetail}>{isDetail ? "閉じる" : "詳しく見る"}</ToggleText>
       {
-        isDetail && (
-          <Detail
-            humidity={humidity}
-            pressure={pressure}
-            sunrise={sunrise}
-            sunset={sunset}
-            deg={deg}
-            speed={speed}
-            gust={gust}
-            all={all}
-            visibility={visibility}
-          />
+        isDetail ? (
+          <>
+            <ToggleText onClick={onClickDetail}>閉じる</ToggleText>
+            <Detail
+              humidity={humidity}
+              pressure={pressure}
+              sunrise={sunrise}
+              sunset={sunset}
+              deg={deg}
+              speed={speed}
+              gust={gust}
+              all={all}
+              visibility={visibility}
+            />
+          </>
+        ) : (
+            <ToggleText onClick={onClickDetail}>詳しく見る</ToggleText>
         )
       }
     </>
