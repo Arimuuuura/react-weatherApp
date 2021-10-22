@@ -12,11 +12,11 @@ const SInput = styled.input`
 
 export const Input = memo((props) => {
 
-  const { onChange, placeholder, value, focus } = props;
+  const { onChange, placeholder, value, focus, onKeyDown } = props;
 
   return (
     <>
-      <SInput ref={focus} type="text" value={value} onChange={onChange} placeholder={placeholder} />
+      <SInput ref={focus} type="text" value={value} onChange={onChange} placeholder={placeholder} onKeyDown={onKeyDown} />
     </>
   )
 })

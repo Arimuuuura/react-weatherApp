@@ -1,4 +1,5 @@
 import React, { memo, useContext } from 'react'
+import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
 import { Place } from './components/Place';
 import { Main } from './components/Main';
@@ -6,6 +7,7 @@ import { Temp } from './components/Temp';
 import { Detail } from './components/Detail';
 import { WeatherDataContext } from '../../../providers/WeatherDataProvider';
 import { useDetail } from './components/useDetail';
+import './components/_detail.css';
 
 const ToggleText = styled.p`
   font-size: 14px;
@@ -18,7 +20,7 @@ const ToggleText = styled.p`
   &:hover {
     opacity: .7;
   }
-`
+`;
 
 export const Current = memo(() => {
   const { isDetail, onClickDetail } = useDetail();
@@ -38,26 +40,20 @@ export const Current = memo(() => {
       <Place data={currentData}>{name}</Place>
       <Main description={description} temp={temp} icon={icon} />
       <Temp temp_min={temp_min} temp_max={temp_max} feels_like={feels_like} />
-      {
-        isDetail ? (
-          <>
-            <ToggleText onClick={onClickDetail}>閉じる</ToggleText>
-            <Detail
-              humidity={humidity}
-              pressure={pressure}
-              sunrise={sunrise}
-              sunset={sunset}
-              deg={deg}
-              speed={speed}
-              gust={gust}
-              all={all}
-              visibility={visibility}
-            />
-          </>
-        ) : (
-            <ToggleText onClick={onClickDetail}>詳しく見る</ToggleText>
-        )
-      }
+      <ToggleText onClick={onClickDetail}>{isDetail ? '閉じる' : '詳しく見る'}</ToggleText>
+      <CSSTransition  in={isDetail} timeout={300} classNames="detail" unmountOnExit>
+        <Detail
+          humidity={humidity}
+          pressure={pressure}
+          sunrise={sunrise}
+          sunset={sunset}
+          deg={deg}
+          speed={speed}
+          gust={gust}
+          all={all}
+          visibility={visibility}
+        />
+      </CSSTransition>
     </>
   )
 })
