@@ -82,6 +82,14 @@ export const WeatherDataProvider = (props) => {
     }
   }, [isLoading, firstText])
 
+  // 適切に郵便番号が入力されている状態でエンターキーを押した場合検索できる
+  const onKeyDown = (e) => {
+    if (!isSearch && e.keyCode === 13) {
+      setCityCode('');
+      setZipCode(`${firstText}-${secondText}`);
+    }
+  }
+
   // 入力された数字を半角数字に置き換える関数
   const isHankaku = (zipCode) => {
     return zipCode.replace(/[０-９]/g, (str) => {
@@ -147,6 +155,7 @@ export const WeatherDataProvider = (props) => {
         isSearch,
         onClickSearch,
         onClickClear,
+        onKeyDown,
         onChangeCity,
         currentData,
         weeklyData,

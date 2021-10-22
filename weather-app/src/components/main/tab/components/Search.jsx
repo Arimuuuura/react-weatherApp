@@ -30,6 +30,7 @@ export const Search = memo(() => {
     isSearch,
     onClickSearch,
     onClickClear,
+    onKeyDown,
   } = useContext(WeatherDataContext);
 
   const Inputs = [
@@ -39,6 +40,7 @@ export const Search = memo(() => {
       value: firstText,
       changeEvent: onChangeFirstText,
       ref: firstTextRef,
+      keyDownEvent: null,
     },
     {
       before: "-",
@@ -46,6 +48,7 @@ export const Search = memo(() => {
       value: secondText,
       changeEvent: onChangeSecondText,
       ref: secondTextRef,
+      keyDownEvent: onKeyDown,
     },
   ];
 
@@ -76,6 +79,7 @@ export const Search = memo(() => {
                 placeholder={input.placeholder}
                 value={input.value}
                 onChange={input.changeEvent}
+                onKeyDown={input.keyDownEvent}
               />
             </React.Fragment>
           ))
