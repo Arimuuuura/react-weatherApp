@@ -23,20 +23,18 @@ export const Main = memo(() => {
   return (
     <MainContainer>
       {
-        isLoading ? (
-          <Loading />
-        ) : (
-          <>
-            {
-              error && <ErrorMessage>{error}</ErrorMessage>
-            }
-            <Tabs />
-            <Current />
-            <Every3Hours />
-            <WeeklyWeather />
-          </>
-        )
+        error && <ErrorMessage>{error}</ErrorMessage>
       }
+      <Tabs />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Current />
+          <Every3Hours />
+          <WeeklyWeather />
+        </>
+      )}
     </MainContainer>
   )
 })
