@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useRef } from 'react'
-import axios from 'axios'
+import { useWeatherDataRepository } from '../api/fetchWeatherData';
 
 export const WeatherDataContext = createContext({});
 
@@ -12,62 +12,31 @@ export const WeatherDataProvider = (props) => {
   const [zipCode, setZipCode] = useState('')
   const [cityCode, setCityCode] = useState('1850144')
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState({});
+  const [error, setError] = useState();
   const [isSearch, setIsSearch] = useState(true)
 
-  const API_KEY = process.env.REACT_APP_API_KEY;
-  const CURRENT_WEATHER_URL = process.env.REACT_APP_CURRENT_WEATHER_URL;
-  const WEEKLY_WEATHER_URL = process.env.REACT_APP_WEEKLY_WEATHER_URL;
-  const LANGUAGE = process.env.REACT_APP_LANGUAGE;
-  const UNITS = process.env.REACT_APP_UNITS;
-
-  const query = `?${zipCode ? `zip=${zipCode},jp` : `id=${cityCode}`}&appid=${API_KEY}&lang=${LANGUAGE}&units=${UNITS}`;
-
-  const getCurrentApiUrl = `${CURRENT_WEATHER_URL}${query}`;
-  const getWeeklyApiUrl = `${WEEKLY_WEATHER_URL}${query}`;
-
-  const notFoundMessage = '入力された郵便番号での検索はできません。他の番号を試してください。';
-  const unexpectedMessage = '予期せぬエラーが発生しました。しばらく時間を置いて、試してください。';
+  const { fetchCurrentData, fetchWeeklyData } = useWeatherDataRepository(zipCode, cityCode)
 
   useEffect(() => {
-    const fetchCurrentData = async () => {
-      await axios.get(
-        getCurrentApiUrl,
-      ).then((res) => {
-        setCurrentData(res.data);
-        setIsLoading(false);
+    const fetchWeatherData = async () => {
+      try {
+        setIsLoading(true);
+        const resCurrentData = await fetchCurrentData()
+        const resWeeklyData = await fetchWeeklyData();
+        console.log(resCurrentData, resWeeklyData)
+        setCurrentData(resCurrentData.data);
+        setWeeklyData(resWeeklyData.data);
         setError(false);
-      }).catch((err) => {
-        console.log(err);
-        // ステータスコードによるエラーメッセージの出し分け
-        err.response.status === 404 ? setError({
-          notFound: notFoundMessage,
-        }) : setError({
-          unexpected: unexpectedMessage,
-        })
-      });
-    };
-
-    const fetchWeeklyData = async () => {
-      await axios.get(
-        getWeeklyApiUrl,
-      ).then((res) => {
-        setWeeklyData(res.data);
+      } catch (err) {
+        console.log(err)
+        if (err && err.message) {
+          setError(err.message)
+        }
+      } finally {
         setIsLoading(false);
-        setError(false);
-      }).catch((err) => {
-        console.log(err);
-        // ステータスコードによるエラーメッセージの出し分け
-        err.response.status === 404 ? setError({
-          notFound: notFoundMessage,
-        }) : setError({
-          unexpected: unexpectedMessage,
-        })
-      });
-    };
-
-    fetchCurrentData();
-    fetchWeeklyData();
+      }
+    }
+    fetchWeatherData()
     // eslint-disable-next-line
   }, [zipCode, cityCode]);
 

@@ -41,6 +41,7 @@ export const Search = memo(() => {
       changeEvent: onChangeFirstText,
       ref: firstTextRef,
       keyDownEvent: null,
+      maxLength: 3
     },
     {
       before: "-",
@@ -49,6 +50,7 @@ export const Search = memo(() => {
       changeEvent: onChangeSecondText,
       ref: secondTextRef,
       keyDownEvent: onKeyDown,
+      maxLength: 4
     },
   ];
 
@@ -80,6 +82,7 @@ export const Search = memo(() => {
                 value={input.value}
                 onChange={input.changeEvent}
                 onKeyDown={input.keyDownEvent}
+                maxLength={input.maxLength}
               />
             </React.Fragment>
           ))
