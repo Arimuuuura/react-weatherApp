@@ -27,7 +27,7 @@ export const Button = memo((props) => {
 
   return (
     <>
-      <SButton style={{backgroundColor: color, opacity: disabled && '.3'}} disabled={disabled} onClick={onClick}>{ children }</SButton>
+      <SButton style={{backgroundColor: color, opacity: disabled && '.3'}} disabled={typeof disabled === 'undefined' && false} onClick={onClick}>{ children }</SButton>
     </>
   )
 })

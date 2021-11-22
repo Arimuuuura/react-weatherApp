@@ -1,20 +1,14 @@
 import React, { memo } from 'react'
-import { Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 export const TabPanel = memo((props) => {
-  const { children, value, index, ...other } = props;
+  const { children, value, index } = props;
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
+    <div>
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>

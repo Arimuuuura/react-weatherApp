@@ -1,9 +1,9 @@
 import React, { memo, useContext } from 'react'
 import styled from 'styled-components';
 import { WeatherDataContext } from '../../../../providers/WeatherDataProvider';
-import { CITYCODE } from './constants/cityData'
+import { CITY_CODE } from './constants/cityData'
 
-const Code = CITYCODE;
+const Code = CITY_CODE;
 
 const Container = styled.div`
   text-align: center;
