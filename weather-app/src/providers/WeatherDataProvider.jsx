@@ -52,7 +52,7 @@ export const WeatherDataProvider = (props) => {
 
   // 適切に郵便番号が入力されている状態でエンターキーを押した場合検索できる
   const onKeyDown = (e) => {
-    if (!canSearch && e.keyCode === 13) {
+    if (canSearch && e.keyCode === 13) {
       onClickSearch()
     }
   }
