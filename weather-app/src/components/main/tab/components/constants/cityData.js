@@ -1,4 +1,4 @@
-export const CITYCODE = [
+export const CITY_CODE = [
   { name: '未選択', code: 1850144 },
   { name: '北海道', code: 2130037 },
   { name: '青森', code: 2130656 },
@@ -47,6 +47,6 @@ export const CITYCODE = [
   { name: '熊本', code: 1858419 },
   { name: '鹿児島', code: 1860825 },
   { name: '沖縄', code: 1854345 },
-]
+];
 
-// console.log(CITYCODE);
+// console.log(CITY_CODE);

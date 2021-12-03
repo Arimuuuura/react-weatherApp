@@ -30,48 +30,23 @@ export const Tabs = memo(() => {
 
   const [value, setValue] = useState(0);
 
-  const TabLabels = [
-    {
-      label: "郵便番号で検索"
-    },
-    {
-      label: "都道府県で検索"
-    },
-  ];
-
-  const TabDetails = [
-    {
-      value: value,
-      index: 0,
-      contents:
-      <Search />,
-    },
-    {
-      value: value,
-      index: 1,
-      contents: <City />
-    },
-  ];
-
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue) => {
     setValue(newValue);
   };
 
   return (
     <>
       <Container value={value} onChange={handleChange}>
-        {
-          TabLabels.map((tab, index) => (
-            <Tab key={index} label={tab.label} />
-          ))
-        }
+        <Tab label='郵便番号で検索' />
+        <Tab label='都道府県で検索' />
       </Container>
       <TabDetailContainer>
-      {
-        TabDetails.map((detail, index) => (
-          <TabPanel key={index} value={detail.value} index={detail.index}>{ detail.contents }</TabPanel>
-        ))
-      }
+        <TabPanel index={0} value={value}>
+          <Search />
+        </TabPanel>
+        <TabPanel index={1} value={value}>
+          <City />
+        </TabPanel>
       </TabDetailContainer>
     </>
   )

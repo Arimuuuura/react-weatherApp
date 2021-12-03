@@ -12,6 +12,10 @@ const InputContainer = styled.div`
   line-height: 40px;
 `
 
+const InputLabel = styled.span`
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+`
+
 const ButtonContainer = styled.div`
   text-align: center;
   margin-top: 24px;
@@ -27,73 +31,38 @@ export const Search = memo(() => {
     secondTextRef,
     onChangeFirstText,
     onChangeSecondText,
-    isSearch,
+    canSearch,
     onClickSearch,
     onClickClear,
     onKeyDown,
   } = useContext(WeatherDataContext);
 
-  const Inputs = [
-    {
-      before: "〒",
-      placeholder: "100",
-      value: firstText,
-      changeEvent: onChangeFirstText,
-      ref: firstTextRef,
-      keyDownEvent: null,
-      maxLength: 3
-    },
-    {
-      before: "-",
-      placeholder: "0000",
-      value: secondText,
-      changeEvent: onChangeSecondText,
-      ref: secondTextRef,
-      keyDownEvent: onKeyDown,
-      maxLength: 4
-    },
-  ];
-
-  const Buttons = [
-    {
-      event: onClickSearch,
-      label: "検索",
-      color: "#007bff",
-      disabled: isSearch,
-    },
-    {
-      event: onClickClear,
-      label: "クリア",
-      color: "green",
-      disabled: false,
-    }
-  ];
-
   return (
     <>
       <InputContainer>
-        {
-          Inputs.map((input, index) => (
-            <React.Fragment key={`input-${index}`}>
-              <span>{input.before}</span>
-              <Input
-                focus={input.ref}
-                placeholder={input.placeholder}
-                value={input.value}
-                onChange={input.changeEvent}
-                onKeyDown={input.keyDownEvent}
-                maxLength={input.maxLength}
-              />
-            </React.Fragment>
-          ))
-        }
+        <>
+          <InputLabel>〒</InputLabel>
+          <Input
+            focus={firstTextRef}
+            placeholder='100'
+            value={firstText}
+            onChange={onChangeFirstText}
+            maxLength={3}
+          />
+          <InputLabel>-</InputLabel>
+          <Input
+            focus={secondTextRef}
+            placeholder='0000'
+            value={secondText}
+            onChange={onChangeSecondText}
+            onKeyDown={onKeyDown}
+            maxLength={4}
+          />
+        </>
       </InputContainer>
       <ButtonContainer>
-        {
-          Buttons.map((button, index) => (
-            <Button key={`button-${index}`} disabled={button.disabled} color={button.color} onClick={button.event}>{button.label}</Button>
-          ))
-        }
+        <Button disabled={!canSearch} color='#007bff' onClick={onClickSearch}>検索</Button>
+        <Button color='green' onClick={onClickClear}>クリア</Button>
       </ButtonContainer>
     </>
   )
