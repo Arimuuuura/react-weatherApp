@@ -11,6 +11,7 @@ v14.17.0
 ```
 2. 無料で公開されている天気予報apiを使用しています。
 ローカルで試す場合は[こちら](https://openweathermap.org/api)からapikeyを取得する必要があります。
+apikey取得手順[参考サイト](https://auto-worker.com/blog/?p=1612)
 
 ### 環境構築
 ```
@@ -29,4 +30,4 @@ $ yarn start
 ```
 
 ブラウザにアクセス
-[こちら](http://localhost:3000/)
+[ローカルホスト](http://localhost:3000/)
